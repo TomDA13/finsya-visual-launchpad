@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,7 +199,7 @@
         <button id="lang-switch" class="px-4 py-2 border-2 border-brand-orange text-brand-orange font-semibold rounded-xl hover:bg-brand-orange hover:text-white transition-all duration-300">
           FR
         </button>
-        <button class="hidden sm:block px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300">
+        <button id="sign-in" class="hidden sm:block px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300">
           Sign In
         </button>
       </div>
@@ -268,11 +269,11 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-8">
         <!-- New Features Title Section -->
         <div class="text-center mb-16">
-          <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h2 id="features-title" class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             Tout ce dont vous avez besoin pour animer vos réseaux sociaux, 
             <span class="gradient-text">un média ou bien votre blog</span> dans la finance
           </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p id="features-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Créer et personnaliser des visuels de pro pour générer de l'interaction avec votre communauté
           </p>
         </div>
@@ -333,18 +334,18 @@
           <div class="text-center group">
             <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+                <path d="M12 2L2 7V10C2 16 6 20.5 12 22C18 20.5 22 16 22 10V7L12 2ZM12 6L18 9V10C18 14.5 15.5 17.5 12 19C8.5 17.5 6 14.5 6 10V9L12 6Z"/>
               </svg>
             </div>
-            <h3 id="benefit2" class="text-lg font-bold text-gray-900 mb-2">Pro-quality in seconds</h3>
-            <p id="benefit2-desc" class="text-gray-600">AI-powered tools that match professional standards.</p>
+            <h3 id="benefit2" class="text-lg font-bold text-gray-900 mb-2">Save 5h per week</h3>
+            <p id="benefit2-desc" class="text-gray-600">Stop spending hours on visual content creation.</p>
           </div>
 
           <div class="text-center group">
             <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z"/>
-              </svg>
+            </svg>
             </div>
             <h3 id="benefit3" class="text-lg font-bold text-gray-900 mb-2">For creators & analysts</h3>
             <p id="benefit3-desc" class="text-gray-600">Perfect for content creators and financial professionals.</p>
@@ -389,14 +390,14 @@
         </div>
         
         <div class="flex items-center space-x-8 text-gray-600">
-          <a href="#" class="hover:text-brand-orange transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-brand-orange transition-colors">Terms of Service</a>
-          <a href="#" class="hover:text-brand-orange transition-colors">Contact</a>
+          <a href="#" id="privacy" class="hover:text-brand-orange transition-colors">Privacy Policy</a>
+          <a href="#" id="terms" class="hover:text-brand-orange transition-colors">Terms of Service</a>
+          <a href="#" id="contact" class="hover:text-brand-orange transition-colors">Contact</a>
         </div>
       </div>
       
       <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
-        <p>&copy; 2025 Finsya Visuals. All rights reserved.</p>
+        <p id="copyright">&copy; 2025 Finsya Visuals. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -540,7 +541,11 @@
 
       // Update title
       const title = document.getElementById('media-title');
-      if (title) title.textContent = mediaItems[currentMediaIndex].title;
+      if (title) {
+        const t = translations[currentLang];
+        title.textContent = mediaItems[currentMediaIndex].title === 'Stock Price Evolution Animation' ? 
+          t.mediaTitle1 : t.mediaTitle2;
+      }
 
       // Update indicators
       document.querySelectorAll('.indicator').forEach((indicator, i) => {
@@ -605,53 +610,71 @@
       });
     });
 
-    // Language translations and other scripts
+    // Language translations
     const translations = {
       en: {
         title: "Publish like a <span class='gradient-text'>finance expert</span><br class='hidden sm:inline' /> in one click.",
         subtitle: "No more community managers or massive marketing budgets: create content worthy of analysts or finance influencers in record time.",
         cta1: "Try it for free",
         cta2: "See features",
-        feature1: "Create animations with stocks evolving over time",
-        feature1Desc: "Generate dynamic visualizations showing how multiple stocks perform across different time periods with smooth, professional animations.",
+        signIn: "Sign In",
+        featuresTitle: "Everything you need to animate your social networks, <span class='gradient-text'>a media or your blog</span> in finance",
+        featuresSubtitle: "Create and customize professional visuals to generate interaction with your community",
+        feature1: "Custom investment animation generator",
+        feature1Desc: "Select your favorite tickers, define the analysis period and chart type. Our AI automatically generates professional animations showing price evolution over the chosen period.",
         feature2: "Multi-criteria company comparisons",
         feature2Desc: "Create compelling side-by-side comparisons of companies across key financial metrics: revenue, free cash flow, earnings per share, revenue growth, and more.",
         benefitsTitle: "Why choose <span class='gradient-text'>Finsya Visuals</span>?",
         benefitsSubtitle: "Professional-quality finance content creation, simplified for everyone.",
         benefit1: "Instant visuals",
         benefit1Desc: "Generate professional charts in seconds, not hours.",
-        benefit2: "Pro-quality in seconds",
-        benefit2Desc: "AI-powered tools that match professional standards.",
+        benefit2: "Save 5h per week",
+        benefit2Desc: "Stop spending hours on visual content creation.",
         benefit3: "For creators & analysts",
         benefit3Desc: "Perfect for content creators and financial professionals.",
         benefit4: "Share anywhere",
         benefit4Desc: "Export to all social platforms and presentation formats.",
         ctaTitle: "Ready to create like a pro?",
         ctaSubtitle: "Join thousands of finance creators who trust Finsya Visuals for their content needs.",
-        ctaFinal: "Start creating for free"
+        ctaFinal: "Start creating for free",
+        mediaTitle1: "Stock Price Evolution Animation",
+        mediaTitle2: "Company Versus Charts",
+        privacy: "Privacy Policy",
+        terms: "Terms of Service",
+        contact: "Contact",
+        copyright: "© 2025 Finsya Visuals. All rights reserved."
       },
       fr: {
         title: "Publie comme un <span class='gradient-text'>expert de la finance</span><br class='hidden sm:inline' /> en un clic.",
         subtitle: "Fini les community managers et les budgets marketing démesurés : crée du contenu digne d'un analyste ou d'un influenceur financier en un temps record.",
         cta1: "Essayez gratuitement",
         cta2: "Découvrir les fonctionnalités",
-        feature1: "Créez des animations avec des actions qui évoluent dans le temps",
-        feature1Desc: "Générez des visualisations dynamiques montrant comment plusieurs actions performent sur différentes périodes avec des animations fluides et professionnelles.",
+        signIn: "Se connecter",
+        featuresTitle: "Tout ce dont vous avez besoin pour animer vos réseaux sociaux, <span class='gradient-text'>un média ou bien votre blog</span> dans la finance",
+        featuresSubtitle: "Créer et personnaliser des visuels de pro pour générer de l'interaction avec votre communauté",
+        feature1: "Générateur d'animations d'investissement personnalisées",
+        feature1Desc: "Sélectionnez vos tickers préférés, définissez la période d'analyse et le type de graphique. Notre IA génère automatiquement des animations professionnelles montrant l'évolution des cours sur la période choisie.",
         feature2: "Comparaisons multi-critères d'entreprises",
-        feature2Desc: "Créez des comparaisons côte à côte convaincantes d'entreprises sur des métriques financières clés : chiffre d'affaires, free cash flow, bénéfice par action, croissance CA, et plus encore.",
+        feature2Desc: "Créez des comparaisons percutantes côte à côte d'entreprises sur des métriques financières clés : chiffre d'affaires, free cash flow, bénéfice par action, croissance CA, et plus encore.",
         benefitsTitle: "Pourquoi choisir <span class='gradient-text'>Finsya Visuals</span> ?",
         benefitsSubtitle: "Création de contenu financier de qualité professionnelle, simplifiée pour tous.",
         benefit1: "Visuels instantanés",
         benefit1Desc: "Générez des graphiques professionnels en secondes, pas en heures.",
-        benefit2: "Qualité pro en quelques secondes",
-        benefit2Desc: "Outils alimentés par l'IA qui correspondent aux standards professionnels.",
+        benefit2: "Économisez 5h par semaine",
+        benefit2Desc: "Arrêtez de passer des heures sur la création de contenu visuel.",
         benefit3: "Pour créateurs et analystes",
         benefit3Desc: "Parfait pour les créateurs de contenu et les professionnels de la finance.",
         benefit4: "Partagez partout",
         benefit4Desc: "Exportez vers toutes les plateformes sociales et formats de présentation.",
         ctaTitle: "Prêt à créer comme un pro ?",
         ctaSubtitle: "Rejoignez des milliers de créateurs financiers qui font confiance à Finsya Visuals pour leurs besoins de contenu.",
-        ctaFinal: "Commencer à créer gratuitement"
+        ctaFinal: "Commencer à créer gratuitement",
+        mediaTitle1: "Animation d'évolution du cours des actions",
+        mediaTitle2: "Graphiques de comparaison d'entreprises",
+        privacy: "Politique de confidentialité",
+        terms: "Conditions d'utilisation",
+        contact: "Contact",
+        copyright: "© 2025 Finsya Visuals. Tous droits réservés."
       }
     };
 
@@ -663,6 +686,9 @@
       document.getElementById("subtitle").textContent = t.subtitle;
       document.getElementById("cta1").textContent = t.cta1;
       document.getElementById("cta2").textContent = t.cta2;
+      document.getElementById("sign-in").textContent = t.signIn;
+      document.getElementById("features-title").innerHTML = t.featuresTitle;
+      document.getElementById("features-subtitle").textContent = t.featuresSubtitle;
       document.getElementById("feature1").textContent = t.feature1;
       document.getElementById("feature1-desc").textContent = t.feature1Desc;
       document.getElementById("feature2").textContent = t.feature2;
@@ -680,6 +706,17 @@
       document.getElementById("cta-title").textContent = t.ctaTitle;
       document.getElementById("cta-subtitle").textContent = t.ctaSubtitle;
       document.getElementById("cta-final").textContent = t.ctaFinal;
+      document.getElementById("privacy").textContent = t.privacy;
+      document.getElementById("terms").textContent = t.terms;
+      document.getElementById("contact").textContent = t.contact;
+      document.getElementById("copyright").textContent = t.copyright;
+      
+      // Update media title based on current carousel position
+      const mediaTitle = document.getElementById('media-title');
+      if (mediaTitle) {
+        mediaTitle.textContent = mediaItems[currentMediaIndex].title === 'Stock Price Evolution Animation' ? 
+          t.mediaTitle1 : t.mediaTitle2;
+      }
     }
 
     document.getElementById('lang-switch').addEventListener('click', function() {
