@@ -97,12 +97,8 @@
   <!-- Header -->
   <header class="relative z-50 w-full">
     <nav class="flex items-center justify-between max-w-7xl mx-auto py-6 px-4 sm:px-8">
-      <div class="flex items-center space-x-2">
-        <div class="w-10 h-10 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
-          </svg>
-        </div>
+      <div class="flex items-center space-x-3">
+        <img src="/lovable-uploads/7e28c0bd-03b4-448d-97d6-1ee8b1a5bc7c.png" alt="Finsya Visuals Logo" class="h-12 w-auto" />
         <span class="text-2xl sm:text-3xl font-bold">
           <span class="gradient-text">Finsya</span>
           <span class="text-gray-900">Visuals</span>
@@ -191,24 +187,46 @@
 
           <!-- Feature 2: Versus -->
           <div class="card-hover bg-white rounded-3xl p-8 shadow-xl border border-orange-50">
-            <div class="aspect-video bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl mb-6 overflow-hidden border-2 border-brand-orange/20">
-              <div class="h-full flex items-center justify-center">
-                <div class="text-center">
-                  <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-xl flex items-center justify-center mx-auto mb-3 animate-float" style="animation-delay: 1s;">
-                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+            <div class="aspect-video bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl mb-6 overflow-hidden border-2 border-brand-orange/20 relative">
+              <div class="h-full flex items-center justify-center p-6">
+                <div class="w-full max-w-sm">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="bg-white rounded-lg p-3 shadow-sm flex-1 mr-2">
+                      <div class="text-xs font-semibold text-gray-500 mb-1">APPLE INC.</div>
+                      <div class="text-sm font-bold text-gray-800">AAPL</div>
+                    </div>
+                    <div class="text-brand-orange font-bold text-lg">VS</div>
+                    <div class="bg-white rounded-lg p-3 shadow-sm flex-1 ml-2">
+                      <div class="text-xs font-semibold text-gray-500 mb-1">MICROSOFT</div>
+                      <div class="text-sm font-bold text-gray-800">MSFT</div>
+                    </div>
                   </div>
-                  <p class="text-brand-orange font-semibold">Versus Comparison</p>
-                  <p class="text-gray-500 text-sm">Multi-criteria analysis</p>
+                  <div class="space-y-2 text-xs">
+                    <div class="flex justify-between bg-white/60 rounded px-2 py-1">
+                      <span class="text-gray-600">Chiffre d'affaires</span>
+                      <span class="font-semibold">$394B vs $211B</span>
+                    </div>
+                    <div class="flex justify-between bg-white/60 rounded px-2 py-1">
+                      <span class="text-gray-600">Free Cash Flow</span>
+                      <span class="font-semibold">$99B vs $65B</span>
+                    </div>
+                    <div class="flex justify-between bg-white/60 rounded px-2 py-1">
+                      <span class="text-gray-600">Bénéfice par action</span>
+                      <span class="font-semibold">$6.16 vs $9.65</span>
+                    </div>
+                    <div class="flex justify-between bg-white/60 rounded px-2 py-1">
+                      <span class="text-gray-600">Croissance CA</span>
+                      <span class="font-semibold">-2.8% vs +13.1%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <h3 id="feature2" class="text-2xl font-bold text-brand-orange mb-4">
-              Multi-criteria versus visuals
+              Multi-criteria company comparisons
             </h3>
             <p id="feature2-desc" class="text-gray-600 text-lg leading-relaxed">
-              Create compelling side-by-side comparisons of assets across multiple metrics: performance, volatility, yield, and more.
+              Create compelling side-by-side comparisons of companies across key financial metrics: revenue, free cash flow, earnings per share, revenue growth, and more.
             </p>
           </div>
         </div>
@@ -291,12 +309,8 @@
   <footer class="bg-gray-50 border-t border-gray-200 py-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center space-x-2 mb-4 md:mb-0">
-          <div class="w-8 h-8 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
-            </svg>
-          </div>
+        <div class="flex items-center space-x-3 mb-4 md:mb-0">
+          <img src="/lovable-uploads/7e28c0bd-03b4-448d-97d6-1ee8b1a5bc7c.png" alt="Finsya Visuals Logo" class="h-8 w-auto" />
           <span class="text-xl font-bold text-gray-900">Finsya Visuals</span>
         </div>
         
@@ -323,8 +337,8 @@
         cta2: "See features",
         feature1: "Create animations with stocks evolving over time",
         feature1Desc: "Generate dynamic visualizations showing how multiple stocks perform across different time periods with smooth, professional animations.",
-        feature2: "Multi-criteria versus visuals",
-        feature2Desc: "Create compelling side-by-side comparisons of assets across multiple metrics: performance, volatility, yield, and more.",
+        feature2: "Multi-criteria company comparisons",
+        feature2Desc: "Create compelling side-by-side comparisons of companies across key financial metrics: revenue, free cash flow, earnings per share, revenue growth, and more.",
         benefitsTitle: "Why choose <span class='gradient-text'>Finsya Visuals</span>?",
         benefitsSubtitle: "Professional-quality finance content creation, simplified for everyone.",
         benefit1: "Instant visuals",
@@ -346,8 +360,8 @@
         cta2: "Découvrir les fonctionnalités",
         feature1: "Créez des animations avec des actions qui évoluent dans le temps",
         feature1Desc: "Générez des visualisations dynamiques montrant comment plusieurs actions performent sur différentes périodes avec des animations fluides et professionnelles.",
-        feature2: "Visuels de comparaison multi-critères",
-        feature2Desc: "Créez des comparaisons côte à côte convaincantes d'actifs sur plusieurs métriques : performance, volatilité, rendement, et plus encore.",
+        feature2: "Comparaisons multi-critères d'entreprises",
+        feature2Desc: "Créez des comparaisons côte à côte convaincantes d'entreprises sur des métriques financières clés : chiffre d'affaires, free cash flow, bénéfice par action, croissance CA, et plus encore.",
         benefitsTitle: "Pourquoi choisir <span class='gradient-text'>Finsya Visuals</span> ?",
         benefitsSubtitle: "Création de contenu financier de qualité professionnelle, simplifiée pour tous.",
         benefit1: "Visuels instantanés",
