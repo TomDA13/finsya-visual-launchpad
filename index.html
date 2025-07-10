@@ -163,7 +163,7 @@
 
     .media-frame {
       width: 500px;
-      height: 300px;
+      height: 400px;
       background: white;
       border-radius: 20px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -496,7 +496,7 @@
         return video;
       } else {
         const img = document.createElement('img');
-        img.className = 'w-full h-full object-cover';
+        img.className = 'w-full h-full object-contain';
         img.src = item.src;
         img.alt = item.title;
         
