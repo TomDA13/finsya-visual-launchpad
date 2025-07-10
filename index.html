@@ -95,22 +95,22 @@
       perspective: 1000px;
     }
 
-    .video-container {
+    .media-container {
       transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .video-container.active {
+    .media-container.active {
       transform: scale(1) translateX(0);
       z-index: 10;
     }
 
-    .video-container.preview {
+    .media-container.preview {
       transform: scale(0.7) translateY(20px);
       opacity: 0.6;
       z-index: 5;
     }
 
-    .video-container.preview:hover {
+    .media-container.preview:hover {
       opacity: 0.9;
       transform: scale(0.75) translateY(15px);
       cursor: pointer;
@@ -133,7 +133,7 @@
       transform: scale(0.95);
     }
 
-    .video-overlay {
+    .media-overlay {
       background: linear-gradient(135deg, rgba(250, 80, 3, 0.1) 0%, rgba(255, 107, 43, 0.05) 100%);
       backdrop-filter: blur(20px);
     }
@@ -189,10 +189,10 @@
         </div>
       </div>
 
-      <!-- Interactive Video Carousel -->
+      <!-- Interactive Media Carousel -->
       <div class="relative animate-slide-up">
         <div class="video-carousel max-w-6xl mx-auto">
-          <!-- Main Video Container -->
+          <!-- Main Media Container -->
           <div class="relative h-96 sm:h-[500px] overflow-hidden">
             <!-- Navigation Arrows -->
             <button id="prevBtn" class="carousel-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
@@ -206,90 +206,54 @@
               </svg>
             </button>
 
-            <!-- Video Containers -->
+            <!-- Media Containers -->
             <div class="relative w-full h-full flex items-center justify-center">
-              <!-- Main Video -->
-              <div class="video-container active absolute inset-0 flex items-center justify-center">
+              <!-- Main Media -->
+              <div class="media-container active absolute inset-0 flex items-center justify-center">
                 <div class="w-full max-w-4xl mx-auto">
                   <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-orange-100">
-                    <!-- Placeholder for video1.mp4 -->
-                    <video class="w-full aspect-video object-cover" autoplay muted loop>
-                      <source src="video1.mp4" type="video/mp4">
-                      <!-- Fallback content -->
-                      <div class="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                        <div class="text-center">
-                          <div class="w-20 h-20 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                          <p class="text-gray-600 font-semibold text-lg">Main Animation Video</p>
-                          <p class="text-gray-500 text-sm mt-2">Add video1.mp4 to public folder</p>
-                        </div>
-                      </div>
-                    </video>
+                    <div id="main-media" class="w-full aspect-video object-cover">
+                      <!-- Main content will be dynamically inserted here -->
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Preview Videos (Left and Right) -->
               <!-- Left Preview -->
-              <div class="video-container preview absolute left-0 top-0 w-full h-full flex items-center justify-start pl-8 pointer-events-none">
-                <div class="w-80 preview-video" data-video="0">
+              <div class="media-container preview absolute left-0 top-0 w-full h-full flex items-center justify-start pl-8 pointer-events-none">
+                <div class="w-80 preview-media" data-index="0">
                   <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 pointer-events-auto">
-                    <video class="w-full aspect-video object-cover" muted>
-                      <source src="video2.mp4" type="video/mp4">
-                      <div class="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                        <div class="text-center">
-                          <div class="w-12 h-12 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-xl flex items-center justify-center mx-auto mb-2">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                          <p class="text-gray-600 font-semibold text-sm">Preview Video</p>
-                          <p class="text-gray-500 text-xs">video2.mp4</p>
-                        </div>
-                      </div>
-                    </video>
+                    <div id="left-preview" class="w-full aspect-video object-cover">
+                      <!-- Left preview content -->
+                    </div>
                   </div>
                 </div>
               </div>
 
               <!-- Right Preview -->
-              <div class="video-container preview absolute right-0 top-0 w-full h-full flex items-center justify-end pr-8 pointer-events-none">
-                <div class="w-80 preview-video" data-video="2">
+              <div class="media-container preview absolute right-0 top-0 w-full h-full flex items-center justify-end pr-8 pointer-events-none">
+                <div class="w-80 preview-media" data-index="0">
                   <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 pointer-events-auto">
-                    <video class="w-full aspect-video object-cover" muted>
-                      <source src="video3.mp4" type="video/mp4">
-                      <div class="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                        <div class="text-center">
-                          <div class="w-12 h-12 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-xl flex items-center justify-center mx-auto mb-2">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                          <p class="text-gray-600 font-semibold text-sm">Preview Video</p>
-                          <p class="text-gray-500 text-xs">video3.mp4</p>
-                        </div>
-                      </div>
-                    </video>
+                    <div id="right-preview" class="w-full aspect-video object-cover">
+                      <!-- Right preview content -->
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Video Indicators -->
+          <!-- Media Indicators -->
           <div class="flex justify-center mt-8 space-x-3">
             <button class="indicator w-3 h-3 rounded-full bg-brand-orange shadow-lg" data-index="0"></button>
             <button class="indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 shadow-lg transition-colors" data-index="1"></button>
             <button class="indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 shadow-lg transition-colors" data-index="2"></button>
+            <button class="indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 shadow-lg transition-colors" data-index="3"></button>
           </div>
 
-          <!-- Video Titles -->
+          <!-- Media Title -->
           <div class="text-center mt-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-2" id="video-title">Stock Price Evolution Animation</h3>
-            <p class="text-gray-600 max-w-2xl mx-auto" id="video-description">Dynamic visualization showing how multiple stocks perform across different time periods with smooth, professional animations.</p>
+            <h3 class="text-2xl font-bold text-gray-900" id="media-title">Stock Price Evolution Animation</h3>
           </div>
         </div>
       </div>
@@ -464,71 +428,120 @@
     </div>
   </footer>
 
-  <!-- Enhanced JavaScript with Video Carousel -->
+  <!-- Enhanced JavaScript with Media Carousel -->
   <script>
-    // Video carousel data
-    const videos = [
+    // Media carousel data - 2 videos and 2 images
+    const mediaItems = [
       {
-        main: 'video1.mp4',
-        title: 'Stock Price Evolution Animation',
-        description: 'Dynamic visualization showing how multiple stocks perform across different time periods with smooth, professional animations.',
-        prev: 'video3.mp4',
-        next: 'video2.mp4'
+        type: 'video',
+        src: 'video1.mp4',
+        title: 'Stock Price Evolution Animation'
       },
       {
-        main: 'video2.mp4',
-        title: 'Multi-Company Comparison Charts',
-        description: 'Create compelling side-by-side comparisons of companies across key financial metrics with interactive visualizations.',
-        prev: 'video1.mp4',
-        next: 'video3.mp4'
+        type: 'video', 
+        src: 'video2.mp4',
+        title: 'Stock Price Evolution Animation'
       },
       {
-        main: 'video3.mp4',
-        title: 'Portfolio Performance Dashboard',
-        description: 'Professional dashboard animations showing portfolio performance, asset allocation, and market trends in real-time.',
-        prev: 'video2.mp4',
-        next: 'video1.mp4'
+        type: 'image',
+        src: 'chart1.jpg',
+        title: 'Company Versus Charts'
+      },
+      {
+        type: 'image',
+        src: 'chart2.jpg', 
+        title: 'Company Versus Charts'
       }
     ];
 
-    let currentVideoIndex = 0;
+    let currentMediaIndex = 0;
 
-    // Update video carousel
-    function updateVideoCarousel(index) {
-      const video = videos[index];
-      const mainVideo = document.querySelector('.video-container.active video');
-      const leftPreview = document.querySelector('.video-container.preview:first-of-type video');
-      const rightPreview = document.querySelector('.video-container.preview:last-of-type video');
+    // Create media element based on type
+    function createMediaElement(item, autoplay = false) {
+      if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.className = 'w-full aspect-video object-cover';
+        video.muted = true;
+        video.loop = true;
+        if (autoplay) video.autoplay = true;
+        
+        const source = document.createElement('source');
+        source.src = item.src;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        
+        // Fallback content
+        const fallback = document.createElement('div');
+        fallback.className = 'aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
+        fallback.innerHTML = `
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <p class="text-gray-600 font-semibold">Video: ${item.title}</p>
+            <p class="text-gray-500 text-sm mt-1">Add ${item.src} to public folder</p>
+          </div>
+        `;
+        video.appendChild(fallback);
+        
+        return video;
+      } else {
+        const img = document.createElement('img');
+        img.className = 'w-full aspect-video object-cover';
+        img.src = item.src;
+        img.alt = item.title;
+        
+        // Error handling for missing images
+        img.onerror = function() {
+          const fallback = document.createElement('div');
+          fallback.className = 'aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
+          fallback.innerHTML = `
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                </svg>
+              </div>
+              <p class="text-gray-600 font-semibold">Image: ${item.title}</p>
+              <p class="text-gray-500 text-sm mt-1">Add ${item.src} to public folder</p>
+            </div>
+          `;
+          img.parentNode.replaceChild(fallback, img);
+        };
+        
+        return img;
+      }
+    }
+
+    // Update media carousel
+    function updateMediaCarousel(index) {
+      const currentItem = mediaItems[index];
+      const leftIndex = (index - 1 + mediaItems.length) % mediaItems.length;
+      const rightIndex = (index + 1) % mediaItems.length;
       
-      // Update main video
-      if (mainVideo) {
-        const source = mainVideo.querySelector('source');
-        if (source) source.src = video.main;
-        mainVideo.load();
-        mainVideo.play().catch(() => {
-          // Fallback if autoplay fails
-          console.log('Autoplay prevented');
-        });
-      }
+      // Update main media
+      const mainContainer = document.getElementById('main-media');
+      const mainElement = createMediaElement(currentItem, true);
+      mainContainer.innerHTML = '';
+      mainContainer.appendChild(mainElement);
 
-      // Update preview videos
-      if (leftPreview) {
-        const source = leftPreview.querySelector('source');
-        if (source) source.src = video.prev;
-        leftPreview.load();
-      }
+      // Update left preview
+      const leftContainer = document.getElementById('left-preview');
+      const leftElement = createMediaElement(mediaItems[leftIndex]);
+      leftContainer.innerHTML = '';
+      leftContainer.appendChild(leftElement);
 
-      if (rightPreview) {
-        const source = rightPreview.querySelector('source');
-        if (source) source.src = video.next;
-        rightPreview.load();
-      }
+      // Update right preview
+      const rightContainer = document.getElementById('right-preview');
+      const rightElement = createMediaElement(mediaItems[rightIndex]);
+      rightContainer.innerHTML = '';
+      rightContainer.appendChild(rightElement);
 
-      // Update text content
-      const title = document.getElementById('video-title');
-      const description = document.getElementById('video-description');
-      if (title) title.textContent = video.title;
-      if (description) description.textContent = video.description;
+      // Update title
+      const title = document.getElementById('media-title');
+      if (title) title.textContent = currentItem.title;
 
       // Update indicators
       document.querySelectorAll('.indicator').forEach((indicator, i) => {
@@ -536,48 +549,48 @@
         indicator.classList.toggle('bg-gray-300', i !== index);
       });
 
-      // Update preview video data attributes
-      const leftContainer = document.querySelector('.video-container.preview:first-of-type .preview-video');
-      const rightContainer = document.querySelector('.video-container.preview:last-of-type .preview-video');
+      // Update preview data attributes
+      const leftPreview = document.querySelector('.preview-media[data-index]');
+      const rightPreview = document.querySelectorAll('.preview-media[data-index]')[1];
       
-      if (leftContainer) leftContainer.setAttribute('data-video', (index - 1 + videos.length) % videos.length);
-      if (rightContainer) rightContainer.setAttribute('data-video', (index + 1) % videos.length);
+      if (leftPreview) leftPreview.setAttribute('data-index', leftIndex);
+      if (rightPreview) rightPreview.setAttribute('data-index', rightIndex);
     }
 
     // Navigation functions
-    function nextVideo() {
-      currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-      updateVideoCarousel(currentVideoIndex);
+    function nextMedia() {
+      currentMediaIndex = (currentMediaIndex + 1) % mediaItems.length;
+      updateMediaCarousel(currentMediaIndex);
     }
 
-    function prevVideo() {
-      currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-      updateVideoCarousel(currentVideoIndex);
+    function prevMedia() {
+      currentMediaIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
+      updateMediaCarousel(currentMediaIndex);
     }
 
-    // Event listeners for video carousel
+    // Event listeners for media carousel
     document.addEventListener('DOMContentLoaded', function() {
       // Navigation buttons
       const nextBtn = document.getElementById('nextBtn');
       const prevBtn = document.getElementById('prevBtn');
       
-      if (nextBtn) nextBtn.addEventListener('click', nextVideo);
-      if (prevBtn) prevBtn.addEventListener('click', prevVideo);
+      if (nextBtn) nextBtn.addEventListener('click', nextMedia);
+      if (prevBtn) prevBtn.addEventListener('click', prevMedia);
 
       // Indicator buttons
       document.querySelectorAll('.indicator').forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
-          currentVideoIndex = index;
-          updateVideoCarousel(currentVideoIndex);
+          currentMediaIndex = index;
+          updateMediaCarousel(currentMediaIndex);
         });
       });
 
-      // Preview video clicks
-      document.querySelectorAll('.preview-video').forEach(preview => {
+      // Preview media clicks
+      document.querySelectorAll('.preview-media').forEach(preview => {
         preview.addEventListener('click', () => {
-          const videoIndex = parseInt(preview.getAttribute('data-video'));
-          currentVideoIndex = videoIndex;
-          updateVideoCarousel(currentVideoIndex);
+          const mediaIndex = parseInt(preview.getAttribute('data-index'));
+          currentMediaIndex = mediaIndex;
+          updateMediaCarousel(currentMediaIndex);
         });
       });
 
@@ -585,15 +598,15 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          prevVideo();
+          prevMedia();
         } else if (e.key === 'ArrowRight') {
           e.preventDefault();
-          nextVideo();
+          nextMedia();
         }
       });
 
       // Initialize carousel
-      updateVideoCarousel(0);
+      updateMediaCarousel(0);
     });
 
     // Language translations and other scripts
