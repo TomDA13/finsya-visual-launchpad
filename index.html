@@ -91,29 +91,57 @@
       background-clip: text;
     }
 
-    .video-carousel {
-      perspective: 1000px;
+    .carousel-container {
+      perspective: 1200px;
+      overflow: hidden;
     }
 
-    .media-container {
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 500px;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .media-container.active {
-      transform: scale(1) translateX(0);
-      z-index: 10;
-    }
-
-    .media-container.preview {
-      transform: scale(0.7) translateY(20px);
-      opacity: 0.6;
-      z-index: 5;
-    }
-
-    .media-container.preview:hover {
-      opacity: 0.9;
-      transform: scale(0.75) translateY(15px);
+    .carousel-item {
+      position: absolute;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: pointer;
+    }
+
+    .carousel-item.active {
+      transform: translateX(0) scale(1) translateZ(0);
+      z-index: 10;
+      opacity: 1;
+    }
+
+    .carousel-item.left {
+      transform: translateX(-320px) scale(0.65) translateZ(-100px);
+      z-index: 5;
+      opacity: 0.7;
+    }
+
+    .carousel-item.right {
+      transform: translateX(320px) scale(0.65) translateZ(-100px);
+      z-index: 5;
+      opacity: 0.7;
+    }
+
+    .carousel-item.hidden {
+      transform: translateX(0) scale(0.4) translateZ(-200px);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .carousel-item:hover:not(.active) {
+      opacity: 0.9;
+      transform: translateX(-320px) scale(0.7) translateZ(-80px);
+    }
+
+    .carousel-item.right:hover:not(.active) {
+      transform: translateX(320px) scale(0.7) translateZ(-80px);
     }
 
     .carousel-nav {
@@ -133,9 +161,19 @@
       transform: scale(0.95);
     }
 
-    .media-overlay {
-      background: linear-gradient(135deg, rgba(250, 80, 3, 0.1) 0%, rgba(255, 107, 43, 0.05) 100%);
-      backdrop-filter: blur(20px);
+    .media-frame {
+      width: 500px;
+      height: 300px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 3px solid rgba(250, 80, 3, 0.1);
+    }
+
+    .carousel-item.active .media-frame {
+      box-shadow: 0 30px 60px rgba(250, 80, 3, 0.3);
+      border-color: rgba(250, 80, 3, 0.2);
     }
   </style>
 </head>
@@ -191,56 +229,22 @@
 
       <!-- Interactive Media Carousel -->
       <div class="relative animate-slide-up">
-        <div class="video-carousel max-w-6xl mx-auto">
-          <!-- Main Media Container -->
-          <div class="relative h-96 sm:h-[500px] overflow-hidden">
-            <!-- Navigation Arrows -->
-            <button id="prevBtn" class="carousel-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
-              <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button id="nextBtn" class="carousel-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
-              <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
+        <div class="carousel-container max-w-7xl mx-auto">
+          <!-- Navigation Arrows -->
+          <button id="prevBtn" class="carousel-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button id="nextBtn" class="carousel-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
 
-            <!-- Media Containers -->
-            <div class="relative w-full h-full flex items-center justify-center">
-              <!-- Main Media -->
-              <div class="media-container active absolute inset-0 flex items-center justify-center">
-                <div class="w-full max-w-4xl mx-auto">
-                  <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-orange-100">
-                    <div id="main-media" class="w-full aspect-video object-cover">
-                      <!-- Main content will be dynamically inserted here -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Left Preview -->
-              <div class="media-container preview absolute left-0 top-0 w-full h-full flex items-center justify-start pl-8 pointer-events-none">
-                <div class="w-80 preview-media" data-index="0">
-                  <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 pointer-events-auto">
-                    <div id="left-preview" class="w-full aspect-video object-cover">
-                      <!-- Left preview content -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Preview -->
-              <div class="media-container preview absolute right-0 top-0 w-full h-full flex items-center justify-end pr-8 pointer-events-none">
-                <div class="w-80 preview-media" data-index="0">
-                  <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 pointer-events-auto">
-                    <div id="right-preview" class="w-full aspect-video object-cover">
-                      <!-- Right preview content -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <!-- Carousel Track -->
+          <div class="carousel-track">
+            <!-- Media items will be dynamically positioned here -->
           </div>
 
           <!-- Media Indicators -->
@@ -428,7 +432,7 @@
     </div>
   </footer>
 
-  <!-- Enhanced JavaScript with Media Carousel -->
+  <!-- Enhanced JavaScript with 3D Carousel -->
   <script>
     // Media carousel data - 2 videos and 2 images
     const mediaItems = [
@@ -455,12 +459,13 @@
     ];
 
     let currentMediaIndex = 0;
+    let carouselItems = [];
 
     // Create media element based on type
     function createMediaElement(item, autoplay = false) {
       if (item.type === 'video') {
         const video = document.createElement('video');
-        video.className = 'w-full aspect-video object-cover';
+        video.className = 'w-full h-full object-cover';
         video.muted = true;
         video.loop = true;
         if (autoplay) video.autoplay = true;
@@ -471,32 +476,34 @@
         video.appendChild(source);
         
         // Fallback content
-        const fallback = document.createElement('div');
-        fallback.className = 'aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
-        fallback.innerHTML = `
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+        video.onerror = function() {
+          const fallback = document.createElement('div');
+          fallback.className = 'w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
+          fallback.innerHTML = `
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <p class="text-gray-600 font-semibold">Video: ${item.title}</p>
+              <p class="text-gray-500 text-sm mt-1">Add ${item.src} to public folder</p>
             </div>
-            <p class="text-gray-600 font-semibold">Video: ${item.title}</p>
-            <p class="text-gray-500 text-sm mt-1">Add ${item.src} to public folder</p>
-          </div>
-        `;
-        video.appendChild(fallback);
+          `;
+          video.parentNode.replaceChild(fallback, video);
+        };
         
         return video;
       } else {
         const img = document.createElement('img');
-        img.className = 'w-full aspect-video object-cover';
+        img.className = 'w-full h-full object-cover';
         img.src = item.src;
         img.alt = item.title;
         
         // Error handling for missing images
         img.onerror = function() {
           const fallback = document.createElement('div');
-          fallback.className = 'aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
+          fallback.className = 'w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center';
           fallback.innerHTML = `
             <div class="text-center">
               <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-brand-orange-light rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -515,61 +522,93 @@
       }
     }
 
-    // Update media carousel
-    function updateMediaCarousel(index) {
-      const currentItem = mediaItems[index];
-      const leftIndex = (index - 1 + mediaItems.length) % mediaItems.length;
-      const rightIndex = (index + 1) % mediaItems.length;
-      
-      // Update main media
-      const mainContainer = document.getElementById('main-media');
-      const mainElement = createMediaElement(currentItem, true);
-      mainContainer.innerHTML = '';
-      mainContainer.appendChild(mainElement);
+    // Create carousel items
+    function createCarouselItems() {
+      const track = document.querySelector('.carousel-track');
+      track.innerHTML = '';
+      carouselItems = [];
 
-      // Update left preview
-      const leftContainer = document.getElementById('left-preview');
-      const leftElement = createMediaElement(mediaItems[leftIndex]);
-      leftContainer.innerHTML = '';
-      leftContainer.appendChild(leftElement);
+      mediaItems.forEach((item, index) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+        carouselItem.innerHTML = `
+          <div class="media-frame">
+            <!-- Media content will be inserted here -->
+          </div>
+        `;
+        
+        const mediaElement = createMediaElement(item, index === currentMediaIndex);
+        carouselItem.querySelector('.media-frame').appendChild(mediaElement);
+        
+        // Add click handler for side items
+        carouselItem.addEventListener('click', () => {
+          if (!carouselItem.classList.contains('active')) {
+            currentMediaIndex = index;
+            updateCarousel();
+          }
+        });
+        
+        track.appendChild(carouselItem);
+        carouselItems.push(carouselItem);
+      });
+    }
 
-      // Update right preview
-      const rightContainer = document.getElementById('right-preview');
-      const rightElement = createMediaElement(mediaItems[rightIndex]);
-      rightContainer.innerHTML = '';
-      rightContainer.appendChild(rightElement);
+    // Position carousel items
+    function updateCarousel() {
+      carouselItems.forEach((item, index) => {
+        item.classList.remove('active', 'left', 'right', 'hidden');
+        
+        if (index === currentMediaIndex) {
+          item.classList.add('active');
+        } else if (index === (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length) {
+          item.classList.add('left');
+        } else if (index === (currentMediaIndex + 1) % mediaItems.length) {
+          item.classList.add('right');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
 
       // Update title
       const title = document.getElementById('media-title');
-      if (title) title.textContent = currentItem.title;
+      if (title) title.textContent = mediaItems[currentMediaIndex].title;
 
       // Update indicators
       document.querySelectorAll('.indicator').forEach((indicator, i) => {
-        indicator.classList.toggle('bg-brand-orange', i === index);
-        indicator.classList.toggle('bg-gray-300', i !== index);
+        indicator.classList.toggle('bg-brand-orange', i === currentMediaIndex);
+        indicator.classList.toggle('bg-gray-300', i !== currentMediaIndex);
       });
 
-      // Update preview data attributes
-      const leftPreview = document.querySelector('.preview-media[data-index]');
-      const rightPreview = document.querySelectorAll('.preview-media[data-index]')[1];
-      
-      if (leftPreview) leftPreview.setAttribute('data-index', leftIndex);
-      if (rightPreview) rightPreview.setAttribute('data-index', rightIndex);
+      // Auto-play only the active video
+      carouselItems.forEach((item, index) => {
+        const video = item.querySelector('video');
+        if (video) {
+          if (index === currentMediaIndex) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      });
     }
 
     // Navigation functions
     function nextMedia() {
       currentMediaIndex = (currentMediaIndex + 1) % mediaItems.length;
-      updateMediaCarousel(currentMediaIndex);
+      updateCarousel();
     }
 
     function prevMedia() {
       currentMediaIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
-      updateMediaCarousel(currentMediaIndex);
+      updateCarousel();
     }
 
     // Event listeners for media carousel
     document.addEventListener('DOMContentLoaded', function() {
+      // Create carousel
+      createCarouselItems();
+      updateCarousel();
+
       // Navigation buttons
       const nextBtn = document.getElementById('nextBtn');
       const prevBtn = document.getElementById('prevBtn');
@@ -581,16 +620,7 @@
       document.querySelectorAll('.indicator').forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
           currentMediaIndex = index;
-          updateMediaCarousel(currentMediaIndex);
-        });
-      });
-
-      // Preview media clicks
-      document.querySelectorAll('.preview-media').forEach(preview => {
-        preview.addEventListener('click', () => {
-          const mediaIndex = parseInt(preview.getAttribute('data-index'));
-          currentMediaIndex = mediaIndex;
-          updateMediaCarousel(currentMediaIndex);
+          updateCarousel();
         });
       });
 
@@ -604,9 +634,6 @@
           nextMedia();
         }
       });
-
-      // Initialize carousel
-      updateMediaCarousel(0);
     });
 
     // Language translations and other scripts
