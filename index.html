@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,6 +194,19 @@
         </span>
       </div>
       
+      <!-- Navigation Menu -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" id="nav-home" class="text-gray-700 hover:text-brand-orange font-medium transition-colors duration-300">
+          Accueil
+        </a>
+        <a href="#features" id="nav-features" class="text-gray-700 hover:text-brand-orange font-medium transition-colors duration-300">
+          Fonctionnalités
+        </a>
+        <a href="#pricing" id="nav-pricing" class="text-gray-700 hover:text-brand-orange font-medium transition-colors duration-300">
+          Prix
+        </a>
+      </div>
+      
       <div class="flex items-center space-x-4">
         <button id="lang-switch" class="px-4 py-2 border-2 border-brand-orange text-brand-orange font-semibold rounded-xl hover:bg-brand-orange hover:text-white transition-all duration-300">
           FR
@@ -208,7 +220,7 @@
 
   <!-- Hero Section -->
   <main class="relative z-10">
-    <section class="max-w-6xl mx-auto px-4 sm:px-8 pt-12 pb-20">
+    <section id="home" class="max-w-6xl mx-auto px-4 sm:px-8 pt-12 pb-20">
       <div class="text-center animate-fade-in">
         <h1 id="main-title" class="text-5xl sm:text-7xl font-black leading-tight mb-6 tracking-tight">
           Publish like a <span class="gradient-text">finance expert</span><br class="hidden sm:inline" /> in one click.
@@ -265,7 +277,7 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="bg-white/50 backdrop-blur-sm py-20">
+    <section id="features" class="bg-white/50 backdrop-blur-sm py-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-8">
         <!-- New Features Title Section -->
         <div class="text-center mb-16">
@@ -359,6 +371,117 @@
             </div>
             <h3 id="benefit4" class="text-lg font-bold text-gray-900 mb-2">Share anywhere</h3>
             <p id="benefit4-desc" class="text-gray-600">Export to all social platforms and presentation formats.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="bg-gradient-to-br from-gray-50 to-white py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="text-center mb-16">
+          <h2 id="pricing-title" class="text-4xl font-bold text-gray-900 mb-4">
+            Tarifs simples et transparents
+          </h2>
+          <p id="pricing-subtitle" class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Choisissez le plan qui correspond à vos besoins
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <!-- Free Plan -->
+          <div class="card-hover bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+            <div class="text-center">
+              <h3 id="plan-free" class="text-2xl font-bold text-gray-900 mb-2">Gratuit</h3>
+              <div class="text-4xl font-black text-brand-orange mb-4">0€</div>
+              <p id="plan-free-desc" class="text-gray-600 mb-6">Pour découvrir nos fonctionnalités</p>
+              <ul class="text-left space-y-3 mb-8">
+                <li id="feature-free-1" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  5 créations par mois
+                </li>
+                <li id="feature-free-2" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Formats de base
+                </li>
+              </ul>
+              <button id="btn-free" class="w-full border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-3 px-6 rounded-xl transition-all duration-300">
+                Commencer gratuitement
+              </button>
+            </div>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="card-hover bg-white rounded-3xl p-8 shadow-xl border-2 border-brand-orange relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span id="popular-badge" class="bg-brand-orange text-white px-4 py-2 rounded-full text-sm font-bold">
+                Populaire
+              </span>
+            </div>
+            <div class="text-center">
+              <h3 id="plan-pro" class="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+              <div class="text-4xl font-black text-brand-orange mb-4">29€<span class="text-lg font-normal text-gray-600">/mois</span></div>
+              <p id="plan-pro-desc" class="text-gray-600 mb-6">Pour les créateurs de contenu</p>
+              <ul class="text-left space-y-3 mb-8">
+                <li id="feature-pro-1" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Créations illimitées
+                </li>
+                <li id="feature-pro-2" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Tous les formats
+                </li>
+                <li id="feature-pro-3" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Support prioritaire
+                </li>
+              </ul>
+              <button id="btn-pro" class="w-full btn-primary text-white font-bold py-3 px-6 rounded-xl">
+                Choisir Pro
+              </button>
+            </div>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="card-hover bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+            <div class="text-center">
+              <h3 id="plan-enterprise" class="text-2xl font-bold text-gray-900 mb-2">Entreprise</h3>
+              <div class="text-4xl font-black text-brand-orange mb-4">Sur mesure</div>
+              <p id="plan-enterprise-desc" class="text-gray-600 mb-6">Pour les équipes et agences</p>
+              <ul class="text-left space-y-3 mb-8">
+                <li id="feature-enterprise-1" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Utilisateurs illimités
+                </li>
+                <li id="feature-enterprise-2" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  API personnalisée
+                </li>
+                <li id="feature-enterprise-3" class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Support dédié
+                </li>
+              </ul>
+              <button id="btn-enterprise" class="w-full border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-3 px-6 rounded-xl transition-all duration-300">
+                Nous contacter
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -618,6 +741,9 @@
         cta1: "Try it for free",
         cta2: "See features",
         signIn: "Sign In",
+        navHome: "Home",
+        navFeatures: "Features", 
+        navPricing: "Pricing",
         featuresTitle: "Everything you need to animate your social networks, <span class='gradient-text'>a media or your blog</span> in finance",
         featuresSubtitle: "Create and customize professional visuals to generate interaction with your community",
         feature1: "Custom investment animation generator",
@@ -634,6 +760,26 @@
         benefit3Desc: "Perfect for content creators and financial professionals.",
         benefit4: "Share anywhere",
         benefit4Desc: "Export to all social platforms and presentation formats.",
+        pricingTitle: "Simple and transparent pricing",
+        pricingSubtitle: "Choose the plan that fits your needs",
+        planFree: "Free",
+        planFreeDesc: "To discover our features",
+        featureFree1: "5 creations per month",
+        featureFree2: "Basic formats",
+        btnFree: "Start for free",
+        planPro: "Pro",
+        planProDesc: "For content creators",
+        featurePro1: "Unlimited creations",
+        featurePro2: "All formats",
+        featurePro3: "Priority support",
+        btnPro: "Choose Pro",
+        planEnterprise: "Enterprise",
+        planEnterpriseDesc: "For teams and agencies",
+        featureEnterprise1: "Unlimited users",
+        featureEnterprise2: "Custom API",
+        featureEnterprise3: "Dedicated support",
+        btnEnterprise: "Contact us",
+        popularBadge: "Popular",
         ctaTitle: "Ready to create like a pro?",
         ctaSubtitle: "Join thousands of finance creators who trust Finsya Visuals for their content needs.",
         ctaFinal: "Start creating for free",
@@ -650,6 +796,9 @@
         cta1: "Essayez gratuitement",
         cta2: "Découvrir les fonctionnalités",
         signIn: "Se connecter",
+        navHome: "Accueil",
+        navFeatures: "Fonctionnalités",
+        navPricing: "Prix",
         featuresTitle: "Tout ce dont vous avez besoin pour animer vos réseaux sociaux, <span class='gradient-text'>un média ou bien votre blog</span> dans la finance",
         featuresSubtitle: "Créer et personnaliser des visuels de pro pour générer de l'interaction avec votre communauté",
         feature1: "Générateur d'animations d'investissement personnalisées",
@@ -666,6 +815,26 @@
         benefit3Desc: "Parfait pour les créateurs de contenu et les professionnels de la finance.",
         benefit4: "Partagez partout",
         benefit4Desc: "Exportez vers toutes les plateformes sociales et formats de présentation.",
+        pricingTitle: "Tarifs simples et transparents",
+        pricingSubtitle: "Choisissez le plan qui correspond à vos besoins",
+        planFree: "Gratuit",
+        planFreeDesc: "Pour découvrir nos fonctionnalités",
+        featureFree1: "5 créations par mois",
+        featureFree2: "Formats de base",
+        btnFree: "Commencer gratuitement",
+        planPro: "Pro",
+        planProDesc: "Pour les créateurs de contenu",
+        featurePro1: "Créations illimitées",
+        featurePro2: "Tous les formats",
+        featurePro3: "Support prioritaire",
+        btnPro: "Choisir Pro",
+        planEnterprise: "Entreprise",
+        planEnterpriseDesc: "Pour les équipes et agences",
+        featureEnterprise1: "Utilisateurs illimités",
+        featureEnterprise2: "API personnalisée",
+        featureEnterprise3: "Support dédié",
+        btnEnterprise: "Nous contacter",
+        popularBadge: "Populaire",
         ctaTitle: "Prêt à créer comme un pro ?",
         ctaSubtitle: "Rejoignez des milliers de créateurs financiers qui font confiance à Finsya Visuals pour leurs besoins de contenu.",
         ctaFinal: "Commencer à créer gratuitement",
@@ -687,6 +856,9 @@
       document.getElementById("cta1").textContent = t.cta1;
       document.getElementById("cta2").textContent = t.cta2;
       document.getElementById("sign-in").textContent = t.signIn;
+      document.getElementById("nav-home").textContent = t.navHome;
+      document.getElementById("nav-features").textContent = t.navFeatures;
+      document.getElementById("nav-pricing").textContent = t.navPricing;
       document.getElementById("features-title").innerHTML = t.featuresTitle;
       document.getElementById("features-subtitle").textContent = t.featuresSubtitle;
       document.getElementById("feature1").textContent = t.feature1;
@@ -703,6 +875,26 @@
       document.getElementById("benefit3-desc").textContent = t.benefit3Desc;
       document.getElementById("benefit4").textContent = t.benefit4;
       document.getElementById("benefit4-desc").textContent = t.benefit4Desc;
+      document.getElementById("pricing-title").textContent = t.pricingTitle;
+      document.getElementById("pricing-subtitle").textContent = t.pricingSubtitle;
+      document.getElementById("plan-free").textContent = t.planFree;
+      document.getElementById("plan-free-desc").textContent = t.planFreeDesc;
+      document.getElementById("feature-free-1").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featureFree1;
+      document.getElementById("feature-free-2").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featureFree2;
+      document.getElementById("btn-free").textContent = t.btnFree;
+      document.getElementById("plan-pro").textContent = t.planPro;
+      document.getElementById("plan-pro-desc").textContent = t.planProDesc;
+      document.getElementById("feature-pro-1").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featurePro1;
+      document.getElementById("feature-pro-2").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featurePro2;
+      document.getElementById("feature-pro-3").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featurePro3;
+      document.getElementById("btn-pro").textContent = t.btnPro;
+      document.getElementById("plan-enterprise").textContent = t.planEnterprise;
+      document.getElementById("plan-enterprise-desc").textContent = t.planEnterpriseDesc;
+      document.getElementById("feature-enterprise-1").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featureEnterprise1;
+      document.getElementById("feature-enterprise-2").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featureEnterprise2;
+      document.getElementById("feature-enterprise-3").innerHTML = '<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' + t.featureEnterprise3;
+      document.getElementById("btn-enterprise").textContent = t.btnEnterprise;
+      document.getElementById("popular-badge").textContent = t.popularBadge;
       document.getElementById("cta-title").textContent = t.ctaTitle;
       document.getElementById("cta-subtitle").textContent = t.ctaSubtitle;
       document.getElementById("cta-final").textContent = t.ctaFinal;
