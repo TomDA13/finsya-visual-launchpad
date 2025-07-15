@@ -23,14 +23,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 font-sans">
-    <!-- Language Selector -->
-    <div class="fixed top-4 right-4 z-50">
-        <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-            <button onclick="switchLanguage('fr')" class="language-btn px-3 py-2 text-sm font-medium transition-colors border-r border-gray-200" data-lang="fr">FR</button>
-            <button onclick="switchLanguage('en')" class="language-btn px-3 py-2 text-sm font-medium transition-colors" data-lang="en">EN</button>
-        </div>
-    </div>
-
     <!-- Sidebar -->
     <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col border-r border-gray-100">
         <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-brand-orange-50 to-white">
@@ -92,6 +84,12 @@
                     <h2 id="page-title" class="text-2xl font-bold text-gray-900">Dashboard</h2>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <!-- Language Selector -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <button onclick="switchLanguage('fr')" class="language-btn px-3 py-1.5 text-sm font-medium transition-colors border-r border-gray-200" data-lang="fr">FR</button>
+                        <button onclick="switchLanguage('en')" class="language-btn px-3 py-1.5 text-sm font-medium transition-colors" data-lang="en">EN</button>
+                    </div>
+                    
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-gradient-to-br from-brand-orange-100 to-brand-orange-50 rounded-full flex items-center justify-center border border-brand-orange-100">
                             <i class="fas fa-user text-brand-orange"></i>
@@ -362,24 +360,6 @@
                                         <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
                                         <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
                                         <option value="benefice-action" selected data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
-                                        <option value="croissance-ca" data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
-                                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
-                                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
-                                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
-                                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
-                                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
-                                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
-                                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
-                                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
-                                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
-                                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
-                                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
-                                    </select>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
-                                        <option value="" data-fr="Sélectionner une métrique" data-en="Select a metric">Sélectionner une métrique</option>
-                                        <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
-                                        <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
-                                        <option value="benefice-action" data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
                                         <option value="croissance-ca" selected data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
                                         <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
                                         <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
@@ -545,6 +525,12 @@
             document.getElementById('page-title').textContent = titles[currentSection][lang];
         }
 
+        // Initialize French as default
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('[data-lang="fr"]').classList.add('bg-brand-orange', 'text-white');
+            document.querySelector('[data-lang="fr"]').classList.remove('text-gray-600', 'hover:text-brand-orange');
+        });
+
         // Navigation
         function showSection(sectionName) {
             // Hide all sections
@@ -640,7 +626,7 @@
                         <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
                         <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
                         <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
-                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</data-en></option>
                         <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
                         <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
                         <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
