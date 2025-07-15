@@ -13,6 +13,8 @@
                         'brand-orange': '#FA5003',
                         'brand-orange-light': '#FF6B2B',
                         'brand-orange-dark': '#E04800',
+                        'brand-orange-50': '#FFF7F2',
+                        'brand-orange-100': '#FFEDE0',
                     }
                 }
             }
@@ -21,48 +23,56 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 font-sans">
+    <!-- Language Selector -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+            <button onclick="switchLanguage('fr')" class="language-btn px-3 py-2 text-sm font-medium transition-colors border-r border-gray-200" data-lang="fr">FR</button>
+            <button onclick="switchLanguage('en')" class="language-btn px-3 py-2 text-sm font-medium transition-colors" data-lang="en">EN</button>
+        </div>
+    </div>
+
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
-        <div class="p-6 border-b border-gray-200">
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col border-r border-gray-100">
+        <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-brand-orange-50 to-white">
             <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 flex items-center justify-center">
                     <img src="/lovable-uploads/40630a41-55cd-476c-a56d-b3d688e25d63.png" alt="Growth Chart" class="w-10 h-10" />
                 </div>
                 <div>
                     <h1 class="text-xl font-bold text-gray-900">Finsya Visual</h1>
-                    <p class="text-xs text-gray-500">Finance Creator</p>
+                    <p class="text-xs text-brand-orange font-medium" data-fr="Finance Creator" data-en="Finance Creator">Finance Creator</p>
                 </div>
             </div>
         </div>
         
         <nav class="p-4 space-y-2 flex-1">
-            <a href="#dashboard" onclick="showSection('dashboard')" class="nav-item active flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-home text-gray-600"></i>
-                <span class="text-gray-700 font-medium">Dashboard</span>
+            <a href="#dashboard" onclick="showSection('dashboard')" class="nav-item active flex items-center space-x-3 p-3 rounded-lg hover:bg-brand-orange-50 transition-colors group">
+                <i class="fas fa-home text-gray-600 group-hover:text-brand-orange transition-colors"></i>
+                <span class="text-gray-700 font-medium group-hover:text-brand-orange transition-colors" data-fr="Dashboard" data-en="Dashboard">Dashboard</span>
             </a>
-            <a href="#video-generator" onclick="showSection('video-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-video text-gray-600"></i>
-                <span class="text-gray-700 font-medium">Générateur Vidéo</span>
+            <a href="#video-generator" onclick="showSection('video-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-brand-orange-50 transition-colors group">
+                <i class="fas fa-video text-gray-600 group-hover:text-brand-orange transition-colors"></i>
+                <span class="text-gray-700 font-medium group-hover:text-brand-orange transition-colors" data-fr="Générateur Vidéo" data-en="Video Generator">Générateur Vidéo</span>
             </a>
-            <a href="#visual-generator" onclick="showSection('visual-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-image text-gray-600"></i>
-                <span class="text-gray-700 font-medium">Générateur de Versus</span>
+            <a href="#visual-generator" onclick="showSection('visual-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-brand-orange-50 transition-colors group">
+                <i class="fas fa-image text-gray-600 group-hover:text-brand-orange transition-colors"></i>
+                <span class="text-gray-700 font-medium group-hover:text-brand-orange transition-colors" data-fr="Générateur de Versus" data-en="VS Generator">Générateur de Versus</span>
             </a>
-            <a href="#history" onclick="showSection('history')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-history text-gray-600"></i>
-                <span class="text-gray-700 font-medium">Historique</span>
+            <a href="#history" onclick="showSection('history')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-brand-orange-50 transition-colors group">
+                <i class="fas fa-history text-gray-600 group-hover:text-brand-orange transition-colors"></i>
+                <span class="text-gray-700 font-medium group-hover:text-brand-orange transition-colors" data-fr="Historique" data-en="History">Historique</span>
             </a>
         </nav>
 
         <!-- Bottom section with Paramètres and Déconnexion -->
-        <div class="p-4 border-t border-gray-200 space-y-2">
-            <a href="#settings" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-cog text-gray-600"></i>
-                <span class="text-gray-700 font-medium">Paramètres</span>
+        <div class="p-4 border-t border-gray-100 space-y-2">
+            <a href="#settings" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand-orange-50 transition-colors group">
+                <i class="fas fa-cog text-gray-600 group-hover:text-brand-orange transition-colors"></i>
+                <span class="text-gray-700 font-medium group-hover:text-brand-orange transition-colors" data-fr="Paramètres" data-en="Settings">Paramètres</span>
             </a>
-            <a href="#logout" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                <i class="fas fa-sign-out-alt text-red-500"></i>
-                <span class="text-red-500 font-medium">Déconnexion</span>
+            <a href="#logout" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-50 transition-colors group">
+                <i class="fas fa-sign-out-alt text-red-500 group-hover:text-red-600 transition-colors"></i>
+                <span class="text-red-500 font-medium group-hover:text-red-600 transition-colors" data-fr="Déconnexion" data-en="Logout">Déconnexion</span>
             </a>
         </div>
     </div>
@@ -73,22 +83,22 @@
     <!-- Main Content -->
     <div class="lg:ml-64 min-h-screen">
         <!-- Header -->
-        <header class="bg-white shadow-sm border-b border-gray-200 p-4">
+        <header class="bg-white shadow-sm border-b border-gray-100 p-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg hover:bg-brand-orange-50 transition-colors">
                         <i class="fas fa-bars text-gray-600"></i>
                     </button>
                     <h2 id="page-title" class="text-2xl font-bold text-gray-900">Dashboard</h2>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-gray-600"></i>
+                        <div class="w-10 h-10 bg-gradient-to-br from-brand-orange-100 to-brand-orange-50 rounded-full flex items-center justify-center border border-brand-orange-100">
+                            <i class="fas fa-user text-brand-orange"></i>
                         </div>
                         <div class="hidden md:block">
                             <p class="text-sm font-medium text-gray-900">John Doe</p>
-                            <p class="text-xs text-gray-500">Utilisateur Premium</p>
+                            <p class="text-xs text-brand-orange font-medium" data-fr="Utilisateur Premium" data-en="Premium User">Utilisateur Premium</p>
                         </div>
                     </div>
                 </div>
@@ -98,79 +108,82 @@
         <!-- Dashboard Section -->
         <div id="dashboard-section" class="section p-6">
             <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">Bienvenue sur Finsya Visual</h3>
-                <p class="text-gray-600">Créez des visuels et vidéos financiers professionnels en quelques clics</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-fr="Bienvenue sur Finsya Visual" data-en="Welcome to Finsya Visual">Bienvenue sur Finsya Visual</h3>
+                <p class="text-gray-600" data-fr="Créez des visuels et vidéos financiers professionnels en quelques clics" data-en="Create professional financial visuals and videos in just a few clicks">Créez des visuels et vidéos financiers professionnels en quelques clics</p>
             </div>
 
             <!-- Quick Actions -->
             <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('video-generator')">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-brand-orange-100 transition-all cursor-pointer group" onclick="showSection('video-generator')">
                     <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-video text-red-600 text-lg"></i>
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-100 to-red-50 rounded-lg flex items-center justify-center group-hover:from-brand-orange-100 group-hover:to-brand-orange-50 transition-all">
+                            <i class="fas fa-video text-red-600 text-lg group-hover:text-brand-orange transition-colors"></i>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-gray-900">Générateur Vidéo</h4>
-                            <p class="text-sm text-gray-600">Animations financières dynamiques</p>
+                            <h4 class="text-lg font-semibold text-gray-900 group-hover:text-brand-orange transition-colors" data-fr="Générateur Vidéo" data-en="Video Generator">Générateur Vidéo</h4>
+                            <p class="text-sm text-gray-600" data-fr="Animations financières dynamiques" data-en="Dynamic financial animations">Animations financières dynamiques</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-4">Créez des vidéos animées avec graphiques financiers, tickers et données en temps réel.</p>
+                    <p class="text-gray-600 mb-4" data-fr="Créez des vidéos animées avec graphiques financiers, tickers et données en temps réel." data-en="Create animated videos with financial charts, tickers and real-time data.">Créez des vidéos animées avec graphiques financiers, tickers et données en temps réel.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">Formats : MP4, GIF</span>
-                        <i class="fas fa-arrow-right text-brand-orange"></i>
+                        <span class="text-sm text-gray-500" data-fr="Formats : MP4, GIF" data-en="Formats: MP4, GIF">Formats : MP4, GIF</span>
+                        <i class="fas fa-arrow-right text-brand-orange group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('visual-generator')">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md hover:border-brand-orange-100 transition-all cursor-pointer group" onclick="showSection('visual-generator')">
                     <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-image text-blue-600 text-lg"></i>
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg flex items-center justify-center group-hover:from-brand-orange-100 group-hover:to-brand-orange-50 transition-all">
+                            <i class="fas fa-image text-blue-600 text-lg group-hover:text-brand-orange transition-colors"></i>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-gray-900">Générateur de Versus</h4>
-                            <p class="text-sm text-gray-600">Images statiques professionnelles</p>
+                            <h4 class="text-lg font-semibold text-gray-900 group-hover:text-brand-orange transition-colors" data-fr="Générateur de Versus" data-en="VS Generator">Générateur de Versus</h4>
+                            <p class="text-sm text-gray-600" data-fr="Images statiques professionnelles" data-en="Professional static images">Images statiques professionnelles</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-4">Générez des visuels statiques pour vos réseaux sociaux avec KPIs et graphiques.</p>
+                    <p class="text-gray-600 mb-4" data-fr="Générez des visuels statiques pour vos réseaux sociaux avec KPIs et graphiques." data-en="Generate static visuals for your social media with KPIs and charts.">Générez des visuels statiques pour vos réseaux sociaux avec KPIs et graphiques.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">Formats : PNG, JPG</span>
-                        <i class="fas fa-arrow-right text-brand-orange"></i>
+                        <span class="text-sm text-gray-500" data-fr="Formats : PNG, JPG" data-en="Formats: PNG, JPG">Formats : PNG, JPG</span>
+                        <i class="fas fa-arrow-right text-brand-orange group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Recent Creations -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="text-lg font-semibold text-gray-900">Créations Récentes</h4>
-                    <a href="#history" onclick="showSection('history')" class="text-brand-orange hover:text-brand-orange-dark text-sm font-medium">Voir tout</a>
+                    <h4 class="text-lg font-semibold text-gray-900" data-fr="Créations Récentes" data-en="Recent Creations">Créations Récentes</h4>
+                    <a href="#history" onclick="showSection('history')" class="text-brand-orange hover:text-brand-orange-dark text-sm font-medium flex items-center space-x-1 group">
+                        <span data-fr="Voir tout" data-en="View all">Voir tout</span>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="bg-gradient-to-br from-brand-orange-50 to-white rounded-lg p-4 text-center border border-brand-orange-100 hover:shadow-sm transition-all">
                         <div class="w-full h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-lg mb-2 flex items-center justify-center">
                             <i class="fas fa-chart-line text-white text-xl"></i>
                         </div>
-                        <p class="text-xs text-gray-600">AAPL - Vidéo</p>
-                        <p class="text-xs text-gray-500">Il y a 2h</p>
+                        <p class="text-xs text-gray-600 font-medium">AAPL - Vidéo</p>
+                        <p class="text-xs text-brand-orange" data-fr="Il y a 2h" data-en="2h ago">Il y a 2h</p>
                     </div>
-                    <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="bg-gradient-to-br from-brand-orange-50 to-white rounded-lg p-4 text-center border border-brand-orange-100 hover:shadow-sm transition-all">
                         <div class="w-full h-20 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg mb-2 flex items-center justify-center">
                             <i class="fas fa-chart-bar text-white text-xl"></i>
                         </div>
-                        <p class="text-xs text-gray-600">TSLA - Visuel</p>
-                        <p class="text-xs text-gray-500">Hier</p>
+                        <p class="text-xs text-gray-600 font-medium">TSLA - Visuel</p>
+                        <p class="text-xs text-brand-orange" data-fr="Hier" data-en="Yesterday">Hier</p>
                     </div>
-                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50">
+                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50 border-2 border-dashed border-gray-300 hover:border-brand-orange-200 hover:bg-brand-orange-50 transition-all cursor-pointer">
                         <div class="w-full h-20 bg-gray-300 rounded-lg mb-2 flex items-center justify-center">
                             <i class="fas fa-plus text-gray-500 text-xl"></i>
                         </div>
-                        <p class="text-xs text-gray-500">Nouvelle création</p>
+                        <p class="text-xs text-gray-500" data-fr="Nouvelle création" data-en="New creation">Nouvelle création</p>
                     </div>
-                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50">
+                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50 border-2 border-dashed border-gray-300 hover:border-brand-orange-200 hover:bg-brand-orange-50 transition-all cursor-pointer">
                         <div class="w-full h-20 bg-gray-300 rounded-lg mb-2 flex items-center justify-center">
                             <i class="fas fa-plus text-gray-500 text-xl"></i>
                         </div>
-                        <p class="text-xs text-gray-500">Nouvelle création</p>
+                        <p class="text-xs text-gray-500" data-fr="Nouvelle création" data-en="New creation">Nouvelle création</p>
                     </div>
                 </div>
             </div>
@@ -179,101 +192,101 @@
         <!-- Video Generator Section -->
         <div id="video-generator-section" class="section hidden p-6">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Générateur de Vidéo Finance</h3>
+                        <h3 class="text-xl font-semibold text-gray-900" data-fr="Générateur de Vidéo Finance" data-en="Finance Video Generator">Générateur de Vidéo Finance</h3>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Configuration Form -->
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tickers Moning (ex. : AAPL.US)</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Tickers Moning (ex. : AAPL.US)" data-en="Moning Tickers (e.g.: AAPL.US)">Tickers Moning (ex. : AAPL.US)</label>
                                 <div id="tickers-container" class="space-y-3">
                                     <div class="ticker-item flex items-center space-x-3">
-                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                         <input type="color" value="#3B82F6" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
                                         <button class="remove-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors" style="display: none;">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <button id="add-ticker" class="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1">
-                                    <i class="fas fa-plus"></i>
-                                    <span>Ajouter un ticker</span>
+                                <button id="add-ticker" class="mt-3 text-brand-orange hover:text-brand-orange-dark font-medium flex items-center space-x-1 group">
+                                    <i class="fas fa-plus group-hover:scale-110 transition-transform"></i>
+                                    <span data-fr="Ajouter un ticker" data-en="Add ticker">Ajouter un ticker</span>
                                 </button>
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mois de départ</label>
-                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Mois de départ" data-en="Start month">Mois de départ</label>
+                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mois de fin</label>
-                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Mois de fin" data-en="End month">Mois de fin</label>
+                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Format" data-en="Format">Format</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                         <option>16/9</option>
                                         <option>9/16</option>
                                         <option>1:1</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mode sombre</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>non</option>
-                                        <option>oui</option>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Mode sombre" data-en="Dark mode">Mode sombre</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+                                        <option data-fr="non" data-en="no">non</option>
+                                        <option data-fr="oui" data-en="yes">oui</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Type d'investissement</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>Unique au départ</option>
-                                        <option>Investissement programmé</option>
-                                        <option>DCA mensuel</option>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Type d'investissement" data-en="Investment type">Type d'investissement</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+                                        <option data-fr="Unique au départ" data-en="One-time initial">Unique au départ</option>
+                                        <option data-fr="Investissement programmé" data-en="Scheduled investment">Investissement programmé</option>
+                                        <option data-fr="DCA mensuel" data-en="Monthly DCA">DCA mensuel</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Valeur d'investissement</label>
-                                    <input type="number" placeholder="100" value="100" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Valeur d'investissement" data-en="Investment value">Valeur d'investissement</label>
+                                    <input type="number" placeholder="100" value="100" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de graphique</label>
-                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                    <option>Lignes</option>
-                                    <option>Barres</option>
-                                    <option>Aires</option>
-                                    <option>Chandelier</option>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Type de graphique" data-en="Chart type">Type de graphique</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+                                    <option data-fr="Lignes" data-en="Lines">Lignes</option>
+                                    <option data-fr="Barres" data-en="Bars">Barres</option>
+                                    <option data-fr="Aires" data-en="Areas">Aires</option>
+                                    <option data-fr="Chandelier" data-en="Candlestick">Chandelier</option>
                                 </select>
                             </div>
 
-                            <button id="generate-video" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
+                            <button id="generate-video" class="w-full bg-gradient-to-r from-brand-orange to-brand-orange-light text-white py-3 px-6 rounded-lg font-medium hover:from-brand-orange-dark hover:to-brand-orange transition-all transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg">
                                 <i class="fas fa-magic"></i>
-                                <span>Générer</span>
+                                <span data-fr="Générer" data-en="Generate">Générer</span>
                             </button>
                         </div>
 
                         <!-- Preview -->
-                        <div class="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
+                        <div class="bg-gradient-to-br from-brand-orange-50 to-gray-50 rounded-lg p-6 flex items-center justify-center border border-brand-orange-100">
                             <div class="text-center">
-                                <div class="w-64 h-36 bg-white rounded-lg shadow-sm border border-gray-200 flex items-center justify-center mb-4">
+                                <div class="w-64 h-36 bg-white rounded-lg shadow-sm border border-brand-orange-100 flex items-center justify-center mb-4">
                                     <div class="text-center">
-                                        <i class="fas fa-play-circle text-gray-400 text-4xl mb-2"></i>
-                                        <p class="text-sm text-gray-500">Aperçu de la vidéo</p>
+                                        <i class="fas fa-play-circle text-brand-orange text-4xl mb-2"></i>
+                                        <p class="text-sm text-gray-500" data-fr="Aperçu de la vidéo" data-en="Video preview">Aperçu de la vidéo</p>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-600">La prévisualisation apparaîtra ici</p>
+                                <p class="text-sm text-gray-600" data-fr="La prévisualisation apparaîtra ici" data-en="Preview will appear here">La prévisualisation apparaîtra ici</p>
                             </div>
                         </div>
                     </div>
@@ -284,125 +297,125 @@
         <!-- Visual Generator Section -->
         <div id="visual-generator-section" class="section hidden p-6">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Générateur de Versus</h3>
+                        <h3 class="text-xl font-semibold text-gray-900" data-fr="Générateur de Versus" data-en="VS Generator">Générateur de Versus</h3>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Configuration Form -->
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Actions à comparer</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-fr="Actions à comparer" data-en="Stocks to compare">Actions à comparer</label>
                                 <div id="actions-container" class="space-y-3">
                                     <div class="action-item flex items-center space-x-3">
-                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                         <input type="color" value="#FA5003" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
                                     </div>
                                     <div class="action-item flex items-center space-x-3">
-                                        <input type="text" placeholder="TSLA.US" value="TSLA.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="text" placeholder="TSLA.US" value="TSLA.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                                         <input type="color" value="#000000" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-3">Métriques à comparer</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-3" data-fr="Métriques à comparer" data-en="Metrics to compare">Métriques à comparer</label>
                                 <div id="metrics-container" class="space-y-3">
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent bg-white">
-                                        <option value="chiffre-affaires" selected>Chiffre d'affaires</option>
-                                        <option value="free-cash-flow">Free cash flow par action</option>
-                                        <option value="benefice-action">Bénéfice par action</option>
-                                        <option value="croissance-ca">Croissance chiffre d'affaire</option>
-                                        <option value="croissance-fcf">Croissance free cash flow</option>
-                                        <option value="croissance-bna">Croissance BNA</option>
-                                        <option value="marge-operationnelle">Marge operationnelle</option>
-                                        <option value="marge-nette">Marge Nette</option>
-                                        <option value="roe">Retour sur Capitaux Propre</option>
-                                        <option value="ratio-distribution">Ratio de distribution</option>
-                                        <option value="ratio-distribution-fcf">Ratio de distribution FCF</option>
-                                        <option value="ratio-couverture">Ratio de couverture des interets</option>
-                                        <option value="dette-capitaux">Dette / Capitaux Propres</option>
-                                        <option value="dette-ebitda">Dette / ebitda</option>
-                                        <option value="capitalisation">Capitalisation Boursière</option>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
+                                        <option value="chiffre-affaires" selected data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
+                                        <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
+                                        <option value="benefice-action" data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
+                                        <option value="croissance-ca" data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
+                                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
+                                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
+                                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
+                                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
+                                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
+                                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
+                                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
+                                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
+                                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
+                                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
                                     </select>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent bg-white">
-                                        <option value="">Sélectionner une métrique</option>
-                                        <option value="chiffre-affaires">Chiffre d'affaires</option>
-                                        <option value="free-cash-flow" selected>Free cash flow par action</option>
-                                        <option value="benefice-action">Bénéfice par action</option>
-                                        <option value="croissance-ca">Croissance chiffre d'affaire</option>
-                                        <option value="croissance-fcf">Croissance free cash flow</option>
-                                        <option value="croissance-bna">Croissance BNA</option>
-                                        <option value="marge-operationnelle">Marge operationnelle</option>
-                                        <option value="marge-nette">Marge Nette</option>
-                                        <option value="roe">Retour sur Capitaux Propre</option>
-                                        <option value="ratio-distribution">Ratio de distribution</option>
-                                        <option value="ratio-distribution-fcf">Ratio de distribution FCF</option>
-                                        <option value="ratio-couverture">Ratio de couverture des interets</option>
-                                        <option value="dette-capitaux">Dette / Capitaux Propres</option>
-                                        <option value="dette-ebitda">Dette / ebitda</option>
-                                        <option value="capitalisation">Capitalisation Boursière</option>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
+                                        <option value="" data-fr="Sélectionner une métrique" data-en="Select a metric">Sélectionner une métrique</option>
+                                        <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
+                                        <option value="free-cash-flow" selected data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
+                                        <option value="benefice-action" data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
+                                        <option value="croissance-ca" data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
+                                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
+                                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
+                                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
+                                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
+                                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
+                                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
+                                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
+                                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
+                                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
+                                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
                                     </select>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent bg-white">
-                                        <option value="">Sélectionner une métrique</option>
-                                        <option value="chiffre-affaires">Chiffre d'affaires</option>
-                                        <option value="free-cash-flow">Free cash flow par action</option>
-                                        <option value="benefice-action" selected>Bénéfice par action</option>
-                                        <option value="croissance-ca">Croissance chiffre d'affaire</option>
-                                        <option value="croissance-fcf">Croissance free cash flow</option>
-                                        <option value="croissance-bna">Croissance BNA</option>
-                                        <option value="marge-operationnelle">Marge operationnelle</option>
-                                        <option value="marge-nette">Marge Nette</option>
-                                        <option value="roe">Retour sur Capitaux Propre</option>
-                                        <option value="ratio-distribution">Ratio de distribution</option>
-                                        <option value="ratio-distribution-fcf">Ratio de distribution FCF</option>
-                                        <option value="ratio-couverture">Ratio de couverture des interets</option>
-                                        <option value="dette-capitaux">Dette / Capitaux Propres</option>
-                                        <option value="dette-ebitda">Dette / ebitda</option>
-                                        <option value="capitalisation">Capitalisation Boursière</option>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
+                                        <option value="" data-fr="Sélectionner une métrique" data-en="Select a metric">Sélectionner une métrique</option>
+                                        <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
+                                        <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
+                                        <option value="benefice-action" selected data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
+                                        <option value="croissance-ca" data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
+                                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
+                                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
+                                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
+                                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
+                                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
+                                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
+                                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
+                                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
+                                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
+                                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
                                     </select>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent bg-white">
-                                        <option value="">Sélectionner une métrique</option>
-                                        <option value="chiffre-affaires">Chiffre d'affaires</option>
-                                        <option value="free-cash-flow">Free cash flow par action</option>
-                                        <option value="benefice-action">Bénéfice par action</option>
-                                        <option value="croissance-ca" selected>Croissance chiffre d'affaire</option>
-                                        <option value="croissance-fcf">Croissance free cash flow</option>
-                                        <option value="croissance-bna">Croissance BNA</option>
-                                        <option value="marge-operationnelle">Marge operationnelle</option>
-                                        <option value="marge-nette">Marge Nette</option>
-                                        <option value="roe">Retour sur Capitaux Propre</option>
-                                        <option value="ratio-distribution">Ratio de distribution</option>
-                                        <option value="ratio-distribution-fcf">Ratio de distribution FCF</option>
-                                        <option value="ratio-couverture">Ratio de couverture des interets</option>
-                                        <option value="dette-capitaux">Dette / Capitaux Propres</option>
-                                        <option value="dette-ebitda">Dette / ebitda</option>
-                                        <option value="capitalisation">Capitalisation Boursière</option>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
+                                        <option value="" data-fr="Sélectionner une métrique" data-en="Select a metric">Sélectionner une métrique</option>
+                                        <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
+                                        <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
+                                        <option value="benefice-action" data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
+                                        <option value="croissance-ca" selected data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
+                                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
+                                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
+                                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
+                                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
+                                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
+                                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
+                                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
+                                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
+                                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
+                                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
                                     </select>
                                 </div>
-                                <button id="add-metric" class="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1">
-                                    <i class="fas fa-plus"></i>
-                                    <span>Ajouter une métrique</span>
+                                <button id="add-metric" class="mt-3 text-brand-orange hover:text-brand-orange-dark font-medium flex items-center space-x-1 group">
+                                    <i class="fas fa-plus group-hover:scale-110 transition-transform"></i>
+                                    <span data-fr="Ajouter une métrique" data-en="Add metric">Ajouter une métrique</span>
                                 </button>
                             </div>
 
-                            <button id="generate-visual" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
+                            <button id="generate-visual" class="w-full bg-gradient-to-r from-brand-orange to-brand-orange-light text-white py-3 px-6 rounded-lg font-medium hover:from-brand-orange-dark hover:to-brand-orange transition-all transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg">
                                 <i class="fas fa-magic"></i>
-                                <span>Générer</span>
+                                <span data-fr="Générer" data-en="Generate">Générer</span>
                             </button>
                         </div>
 
                         <!-- Preview -->
-                        <div class="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
+                        <div class="bg-gradient-to-br from-brand-orange-50 to-gray-50 rounded-lg p-6 flex items-center justify-center border border-brand-orange-100">
                             <div class="text-center">
-                                <div class="w-64 h-64 bg-white rounded-lg shadow-sm border border-gray-200 flex items-center justify-center mb-4">
+                                <div class="w-64 h-64 bg-white rounded-lg shadow-sm border border-brand-orange-100 flex items-center justify-center mb-4">
                                     <div class="text-center">
-                                        <i class="fas fa-image text-gray-400 text-4xl mb-2"></i>
-                                        <p class="text-sm text-gray-500">Aperçu du versus</p>
+                                        <i class="fas fa-image text-brand-orange text-4xl mb-2"></i>
+                                        <p class="text-sm text-gray-500" data-fr="Aperçu du versus" data-en="VS preview">Aperçu du versus</p>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-600">La prévisualisation apparaîtra ici</p>
+                                <p class="text-sm text-gray-600" data-fr="La prévisualisation apparaîtra ici" data-en="Preview will appear here">La prévisualisation apparaîtra ici</p>
                             </div>
                         </div>
                     </div>
@@ -412,77 +425,77 @@
 
         <!-- History Section -->
         <div id="history-section" class="section hidden p-6">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-6">Historique des Créations</h3>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6" data-fr="Historique des Créations" data-en="Creation History">Historique des Créations</h3>
                 
                 <div class="grid gap-4">
-                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                    <div class="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-brand-orange-50 hover:border-brand-orange-100 transition-all group">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-video text-white"></i>
                             </div>
                             <div>
-                                <h4 class="font-medium text-gray-900">AAPL - Animation de prix</h4>
-                                <p class="text-sm text-gray-600">Vidéo • 16:9 • Mode sombre</p>
-                                <p class="text-xs text-gray-500">Créé il y a 2 heures</p>
+                                <h4 class="font-medium text-gray-900 group-hover:text-brand-orange transition-colors" data-fr="AAPL - Animation de prix" data-en="AAPL - Price Animation">AAPL - Animation de prix</h4>
+                                <p class="text-sm text-gray-600" data-fr="Vidéo • 16:9 • Mode sombre" data-en="Video • 16:9 • Dark mode">Vidéo • 16:9 • Mode sombre</p>
+                                <p class="text-xs text-brand-orange font-medium" data-fr="Créé il y a 2 heures" data-en="Created 2 hours ago">Créé il y a 2 heures</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-download"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-share"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-red-500">
+                            <button class="p-2 text-gray-500 hover:text-red-500 transition-colors">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                    <div class="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-brand-orange-50 hover:border-brand-orange-100 transition-all group">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-image text-white"></i>
                             </div>
                             <div>
-                                <h4 class="font-medium text-gray-900">TSLA - KPI Card</h4>
-                                <p class="text-sm text-gray-600">Visuel • 1:1 • Style moderne</p>
-                                <p class="text-xs text-gray-500">Créé hier</p>
+                                <h4 class="font-medium text-gray-900 group-hover:text-brand-orange transition-colors" data-fr="TSLA - KPI Card" data-en="TSLA - KPI Card">TSLA - KPI Card</h4>
+                                <p class="text-sm text-gray-600" data-fr="Visuel • 1:1 • Style moderne" data-en="Visual • 1:1 • Modern style">Visuel • 1:1 • Style moderne</p>
+                                <p class="text-xs text-brand-orange font-medium" data-fr="Créé hier" data-en="Created yesterday">Créé hier</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-download"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-share"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-red-500">
+                            <button class="p-2 text-gray-500 hover:text-red-500 transition-colors">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                    <div class="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-brand-orange-50 hover:border-brand-orange-100 transition-all group">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-video text-white"></i>
                             </div>
                             <div>
-                                <h4 class="font-medium text-gray-900">NVDA - Graphique performance</h4>
-                                <p class="text-sm text-gray-600">Vidéo • 9:16 • Mode clair</p>
-                                <p class="text-xs text-gray-500">Créé il y a 3 jours</p>
+                                <h4 class="font-medium text-gray-900 group-hover:text-brand-orange transition-colors" data-fr="NVDA - Graphique performance" data-en="NVDA - Performance Chart">NVDA - Graphique performance</h4>
+                                <p class="text-sm text-gray-600" data-fr="Vidéo • 9:16 • Mode clair" data-en="Video • 9:16 • Light mode">Vidéo • 9:16 • Mode clair</p>
+                                <p class="text-xs text-brand-orange font-medium" data-fr="Créé il y a 3 jours" data-en="Created 3 days ago">Créé il y a 3 jours</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-download"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange transition-colors">
                                 <i class="fas fa-share"></i>
                             </button>
-                            <button class="p-2 text-gray-500 hover:text-red-500">
+                            <button class="p-2 text-gray-500 hover:text-red-500 transition-colors">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -493,6 +506,45 @@
     </div>
 
     <script>
+        // Language system
+        let currentLang = 'fr';
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-orange', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:text-brand-orange');
+            });
+            
+            document.querySelector(`[data-lang="${lang}"]`).classList.remove('text-gray-600', 'hover:text-brand-orange');
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('bg-brand-orange', 'text-white');
+            
+            // Update content
+            document.querySelectorAll('[data-fr]').forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+                if (text) {
+                    if (element.tagName === 'OPTION') {
+                        element.textContent = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+            
+            // Update page titles
+            const titles = {
+                'dashboard': { fr: 'Dashboard', en: 'Dashboard' },
+                'video-generator': { fr: 'Générateur Vidéo', en: 'Video Generator' },
+                'visual-generator': { fr: 'Générateur de Versus', en: 'VS Generator' },
+                'history': { fr: 'Historique', en: 'History' }
+            };
+            
+            const currentSection = document.querySelector('.section:not(.hidden)').id.replace('-section', '');
+            document.getElementById('page-title').textContent = titles[currentSection][lang];
+        }
+
         // Navigation
         function showSection(sectionName) {
             // Hide all sections
@@ -511,12 +563,12 @@
             
             // Update page title
             const titles = {
-                'dashboard': 'Dashboard',
-                'video-generator': 'Générateur Vidéo',
-                'visual-generator': 'Générateur de Versus',
-                'history': 'Historique'
+                'dashboard': { fr: 'Dashboard', en: 'Dashboard' },
+                'video-generator': { fr: 'Générateur Vidéo', en: 'Video Generator' },
+                'visual-generator': { fr: 'Générateur de Versus', en: 'VS Generator' },
+                'history': { fr: 'Historique', en: 'History' }
             };
-            document.getElementById('page-title').textContent = titles[sectionName];
+            document.getElementById('page-title').textContent = titles[sectionName][currentLang];
         }
 
         // Sidebar toggle
@@ -538,7 +590,7 @@
                     const tickerDiv = document.createElement('div');
                     tickerDiv.className = 'ticker-item flex items-center space-x-3';
                     tickerDiv.innerHTML = `
-                        <input type="text" placeholder="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                        <input type="text" placeholder="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors">
                         <input type="color" value="#3B82F6" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
                         <button class="remove-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors">
                             <i class="fas fa-times"></i>
@@ -576,24 +628,24 @@
             if (addMetricBtn && metricsContainer) {
                 addMetricBtn.addEventListener('click', function() {
                     const selectDiv = document.createElement('select');
-                    selectDiv.className = 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent bg-white';
+                    selectDiv.className = 'w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white';
                     selectDiv.innerHTML = `
-                        <option value="">Sélectionner une métrique</option>
-                        <option value="chiffre-affaires">Chiffre d'affaires</option>
-                        <option value="free-cash-flow">Free cash flow par action</option>
-                        <option value="benefice-action">Bénéfice par action</option>
-                        <option value="croissance-ca">Croissance chiffre d'affaire</option>
-                        <option value="croissance-fcf">Croissance free cash flow</option>
-                        <option value="croissance-bna">Croissance BNA</option>
-                        <option value="marge-operationnelle">Marge operationnelle</option>
-                        <option value="marge-nette">Marge Nette</option>
-                        <option value="roe">Retour sur Capitaux Propre</option>
-                        <option value="ratio-distribution">Ratio de distribution</option>
-                        <option value="ratio-distribution-fcf">Ratio de distribution FCF</option>
-                        <option value="ratio-couverture">Ratio de couverture des interets</option>
-                        <option value="dette-capitaux">Dette / Capitaux Propres</option>
-                        <option value="dette-ebitda">Dette / ebitda</option>
-                        <option value="capitalisation">Capitalisation Boursière</option>
+                        <option value="" data-fr="Sélectionner une métrique" data-en="Select a metric">Sélectionner une métrique</option>
+                        <option value="chiffre-affaires" data-fr="Chiffre d'affaires" data-en="Revenue">Chiffre d'affaires</option>
+                        <option value="free-cash-flow" data-fr="Free cash flow par action" data-en="Free cash flow per share">Free cash flow par action</option>
+                        <option value="benefice-action" data-fr="Bénéfice par action" data-en="Earnings per share">Bénéfice par action</option>
+                        <option value="croissance-ca" data-fr="Croissance chiffre d'affaire" data-en="Revenue growth">Croissance chiffre d'affaire</option>
+                        <option value="croissance-fcf" data-fr="Croissance free cash flow" data-en="FCF growth">Croissance free cash flow</option>
+                        <option value="croissance-bna" data-fr="Croissance BNA" data-en="EPS growth">Croissance BNA</option>
+                        <option value="marge-operationnelle" data-fr="Marge operationnelle" data-en="Operating margin">Marge operationnelle</option>
+                        <option value="marge-nette" data-fr="Marge Nette" data-en="Net margin">Marge Nette</option>
+                        <option value="roe" data-fr="Retour sur Capitaux Propre" data-en="Return on Equity">Retour sur Capitaux Propre</option>
+                        <option value="ratio-distribution" data-fr="Ratio de distribution" data-en="Payout ratio">Ratio de distribution</option>
+                        <option value="ratio-distribution-fcf" data-fr="Ratio de distribution FCF" data-en="FCF payout ratio">Ratio de distribution FCF</option>
+                        <option value="ratio-couverture" data-fr="Ratio de couverture des interets" data-en="Interest coverage ratio">Ratio de couverture des interets</option>
+                        <option value="dette-capitaux" data-fr="Dette / Capitaux Propres" data-en="Debt to Equity">Dette / Capitaux Propres</option>
+                        <option value="dette-ebitda" data-fr="Dette / ebitda" data-en="Debt to EBITDA">Dette / ebitda</option>
+                        <option value="capitalisation" data-fr="Capitalisation Boursière" data-en="Market Cap">Capitalisation Boursière</option>
                     `;
                     metricsContainer.appendChild(selectDiv);
                 });
@@ -632,8 +684,9 @@
 
     <style>
         .nav-item.active {
-            background-color: #FFF7ED;
+            background: linear-gradient(135deg, #FFF7F2 0%, #FFEDE0 100%);
             color: #FA5003;
+            border-left: 3px solid #FA5003;
         }
         
         .nav-item.active i {
@@ -643,6 +696,14 @@
         .nav-item.active span {
             color: #FA5003;
             font-weight: 600;
+        }
+        
+        .language-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .language-btn:hover {
+            transform: translateY(-1px);
         }
     </style>
 </body>
