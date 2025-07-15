@@ -143,30 +143,10 @@ const Dashboard = () => {
           <div className="lg:col-span-2">
             {activeSection === 'video' && (
               <div className="bg-white rounded-xl shadow-sm border p-8">
-                <div className="flex items-center space-x-3 mb-8">
-                  <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <Play className="w-5 h-5 text-orange-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Générateur d'animations investissement</h2>
-                </div>
-
-                <div className="flex space-x-8 mb-8">
-                  <button className="flex items-center space-x-2 px-4 py-2 border-b-2 border-blue-500 text-blue-600 font-medium">
-                    <Play className="w-4 h-4" />
-                    <span>Animation</span>
-                  </button>
-                  <button className="flex items-center space-x-2 px-4 py-2 text-gray-500 hover:text-gray-700">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Versus</span>
-                  </button>
-                </div>
-                
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {/* Tickers Section */}
                   <div>
-                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                    <Label className="block text-sm font-medium text-gray-900 mb-3">
                       Tickers Moning (ex. : AAPL.US)
                     </Label>
                     <div className="space-y-3">
@@ -178,25 +158,23 @@ const Dashboard = () => {
                               placeholder="AAPL.US"
                               value={ticker.symbol}
                               onChange={(e) => updateTicker(index, 'symbol', e.target.value)}
-                              className="h-12 text-lg border-gray-300"
+                              className="w-full"
                             />
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <input
-                              type="color"
-                              value={ticker.color}
-                              onChange={(e) => updateTicker(index, 'color', e.target.value)}
-                              className="w-12 h-12 rounded-lg border border-gray-300 cursor-pointer"
-                            />
-                            {tickers.length > 1 && (
-                              <button
-                                onClick={() => removeTicker(index)}
-                                className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                              >
-                                <X className="w-4 h-4" />
-                              </button>
-                            )}
-                          </div>
+                          <input
+                            type="color"
+                            value={ticker.color}
+                            onChange={(e) => updateTicker(index, 'color', e.target.value)}
+                            className="w-10 h-10 rounded border border-gray-300 cursor-pointer"
+                          />
+                          {tickers.length > 1 && (
+                            <button
+                              onClick={() => removeTicker(index)}
+                              className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -212,48 +190,36 @@ const Dashboard = () => {
                   {/* Date Range */}
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Mois de départ
                       </Label>
-                      <div className="relative">
-                        <Input
-                          type="date"
-                          className="h-12 text-lg border-gray-300 pr-10"
-                        />
-                        <Calendar className="absolute right-3 top-3 w-6 h-6 text-gray-400 pointer-events-none" />
-                      </div>
+                      <Input type="date" className="w-full" />
                     </div>
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Mois de fin
                       </Label>
-                      <div className="relative">
-                        <Input
-                          type="date"
-                          className="h-12 text-lg border-gray-300 pr-10"
-                        />
-                        <Calendar className="absolute right-3 top-3 w-6 h-6 text-gray-400 pointer-events-none" />
-                      </div>
+                      <Input type="date" className="w-full" />
                     </div>
                   </div>
 
                   {/* Format and Dark Mode */}
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Format
                       </Label>
-                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                      <select className="w-full h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
                         <option>16/9</option>
                         <option>9/16</option>
                         <option>1:1</option>
                       </select>
                     </div>
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Mode sombre
                       </Label>
-                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                      <select className="w-full h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
                         <option>non</option>
                         <option>oui</option>
                       </select>
@@ -263,34 +229,34 @@ const Dashboard = () => {
                   {/* Investment Type and Value */}
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Type d'investissement
                       </Label>
-                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                      <select className="w-full h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
                         <option>Unique au départ</option>
                         <option>Investissement programmé</option>
                         <option>DCA mensuel</option>
                       </select>
                     </div>
                     <div>
-                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      <Label className="block text-sm font-medium text-gray-900 mb-3">
                         Valeur d'investissement
                       </Label>
                       <Input
                         type="number"
                         placeholder="100"
                         defaultValue="100"
-                        className="h-12 text-lg border-gray-300"
+                        className="w-full"
                       />
                     </div>
                   </div>
 
                   {/* Chart Type */}
                   <div>
-                    <Label className="block text-base font-semibold text-gray-900 mb-3">
+                    <Label className="block text-sm font-medium text-gray-900 mb-3">
                       Type de graphique
                     </Label>
-                    <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                    <select className="w-full h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
                       <option>Lignes</option>
                       <option>Barres</option>
                       <option>Aires</option>
@@ -299,7 +265,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className="pt-6">
-                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium transition-colors">
                       Générer
                     </button>
                   </div>
@@ -309,17 +275,10 @@ const Dashboard = () => {
 
             {activeSection === 'image' && (
               <div className="bg-white rounded-xl shadow-sm border p-8">
-                <div className="flex items-center space-x-3 mb-8">
-                  <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <Image className="w-5 h-5 text-orange-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Créer un visuel financier</h2>
-                </div>
-                
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {/* Tickers Section for Images */}
                   <div>
-                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                    <Label className="block text-sm font-medium text-gray-900 mb-3">
                       Tickers Moning (ex. : AAPL.US)
                     </Label>
                     <div className="space-y-3">
@@ -331,25 +290,23 @@ const Dashboard = () => {
                               placeholder="AAPL.US"
                               value={ticker.symbol}
                               onChange={(e) => updateImageTicker(index, 'symbol', e.target.value)}
-                              className="h-12 text-lg border-gray-300"
+                              className="w-full"
                             />
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <input
-                              type="color"
-                              value={ticker.color}
-                              onChange={(e) => updateImageTicker(index, 'color', e.target.value)}
-                              className="w-12 h-12 rounded-lg border border-gray-300 cursor-pointer"
-                            />
-                            {imageTickers.length > 1 && (
-                              <button
-                                onClick={() => removeImageTicker(index)}
-                                className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                              >
-                                <X className="w-4 h-4" />
-                              </button>
-                            )}
-                          </div>
+                          <input
+                            type="color"
+                            value={ticker.color}
+                            onChange={(e) => updateImageTicker(index, 'color', e.target.value)}
+                            className="w-10 h-10 rounded border border-gray-300 cursor-pointer"
+                          />
+                          {imageTickers.length > 1 && (
+                            <button
+                              onClick={() => removeImageTicker(index)}
+                              className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -357,7 +314,7 @@ const Dashboard = () => {
 
                   {/* Charts Section */}
                   <div>
-                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                    <Label className="block text-sm font-medium text-gray-900 mb-3">
                       Graphiques
                     </Label>
                     <div className="space-y-3">
@@ -383,7 +340,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className="pt-6">
-                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium transition-colors">
                       Générer
                     </button>
                   </div>
