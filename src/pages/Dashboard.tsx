@@ -1,10 +1,30 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Play, Image, History, Download, Upload, Settings } from 'lucide-react';
+import { ArrowLeft, Play, Image, History, Download, Upload, Settings, Plus, X, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState('video');
+  const [tickers, setTickers] = useState([{ symbol: 'AAPL.US', color: '#3B82F6' }]);
+
+  const addTicker = () => {
+    setTickers([...tickers, { symbol: '', color: '#3B82F6' }]);
+  };
+
+  const removeTicker = (index: number) => {
+    if (tickers.length > 1) {
+      setTickers(tickers.filter((_, i) => i !== index));
+    }
+  };
+
+  const updateTicker = (index: number, field: 'symbol' | 'color', value: string) => {
+    const updatedTickers = tickers.map((ticker, i) => 
+      i === index ? { ...ticker, [field]: value } : ticker
+    );
+    setTickers(updatedTickers);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -83,65 +103,167 @@ const Dashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-2">
             {activeSection === 'video' && (
-              <div className="bg-white rounded-xl shadow-sm border p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Créer une vidéo financière</h2>
+              <div className="bg-white rounded-xl shadow-sm border p-8">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <Play className="w-5 h-5 text-orange-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900">Générateur d'animations investissement</h2>
+                </div>
+
+                <div className="flex space-x-8 mb-8">
+                  <button className="flex items-center space-x-2 px-4 py-2 border-b-2 border-blue-500 text-blue-600 font-medium">
+                    <Play className="w-4 h-4" />
+                    <span>Animation</span>
+                  </button>
+                  <button className="flex items-center space-x-2 px-4 py-2 text-gray-500 hover:text-gray-700">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Versus</span>
+                  </button>
+                </div>
                 
-                <div className="space-y-6">
+                <div className="space-y-8">
+                  {/* Tickers Section */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Type de contenu
-                    </label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                      <option>Analyse de marché</option>
-                      <option>Performance d'actions</option>
-                      <option>Crypto-monnaies</option>
-                      <option>Indices boursiers</option>
-                    </select>
+                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                      Tickers Moning (ex. : AAPL.US)
+                    </Label>
+                    <div className="space-y-3">
+                      {tickers.map((ticker, index) => (
+                        <div key={index} className="flex items-center space-x-3">
+                          <div className="flex-1">
+                            <Input
+                              type="text"
+                              placeholder="AAPL.US"
+                              value={ticker.symbol}
+                              onChange={(e) => updateTicker(index, 'symbol', e.target.value)}
+                              className="h-12 text-lg border-gray-300"
+                            />
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="color"
+                              value={ticker.color}
+                              onChange={(e) => updateTicker(index, 'color', e.target.value)}
+                              className="w-12 h-12 rounded-lg border border-gray-300 cursor-pointer"
+                            />
+                            {tickers.length > 1 && (
+                              <button
+                                onClick={() => removeTicker(index)}
+                                className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      onClick={addTicker}
+                      className="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Ajouter un ticker</span>
+                    </button>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Symbole/Ticker
-                    </label>
-                    <input 
-                      type="text" 
-                      placeholder="Ex: AAPL, BTC, CAC40"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Période d'analyse
-                    </label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                      <option>1 jour</option>
-                      <option>1 semaine</option>
-                      <option>1 mois</option>
-                      <option>3 mois</option>
-                      <option>1 an</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Style de vidéo
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="border-2 border-gray-200 rounded-lg p-3 hover:border-orange-500 cursor-pointer">
-                        <div className="w-full h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded mb-2"></div>
-                        <p className="text-sm font-medium">Moderne</p>
+                  {/* Date Range */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Mois de départ
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          type="date"
+                          className="h-12 text-lg border-gray-300 pr-10"
+                        />
+                        <Calendar className="absolute right-3 top-3 w-6 h-6 text-gray-400 pointer-events-none" />
                       </div>
-                      <div className="border-2 border-gray-200 rounded-lg p-3 hover:border-orange-500 cursor-pointer">
-                        <div className="w-full h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded mb-2"></div>
-                        <p className="text-sm font-medium">Professionnel</p>
+                    </div>
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Mois de fin
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          type="date"
+                          className="h-12 text-lg border-gray-300 pr-10"
+                        />
+                        <Calendar className="absolute right-3 top-3 w-6 h-6 text-gray-400 pointer-events-none" />
                       </div>
                     </div>
                   </div>
 
-                  <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
-                    Générer la vidéo
-                  </button>
+                  {/* Format and Dark Mode */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Format
+                      </Label>
+                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                        <option>16/9</option>
+                        <option>9/16</option>
+                        <option>1:1</option>
+                      </select>
+                    </div>
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Mode sombre
+                      </Label>
+                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                        <option>non</option>
+                        <option>oui</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Investment Type and Value */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Type d'investissement
+                      </Label>
+                      <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                        <option>Unique au départ</option>
+                        <option>Investissement programmé</option>
+                        <option>DCA mensuel</option>
+                      </select>
+                    </div>
+                    <div>
+                      <Label className="block text-base font-semibold text-gray-900 mb-3">
+                        Valeur d'investissement
+                      </Label>
+                      <Input
+                        type="number"
+                        placeholder="100"
+                        defaultValue="100"
+                        className="h-12 text-lg border-gray-300"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Chart Type */}
+                  <div>
+                    <Label className="block text-base font-semibold text-gray-900 mb-3">
+                      Type de graphique
+                    </Label>
+                    <select className="w-full h-12 px-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                      <option>Lignes</option>
+                      <option>Barres</option>
+                      <option>Aires</option>
+                      <option>Chandelier</option>
+                    </select>
+                  </div>
+
+                  <div className="pt-6">
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+                      Générer
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
