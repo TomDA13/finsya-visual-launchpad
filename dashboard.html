@@ -54,19 +54,6 @@
                 <span class="text-gray-700 font-medium">Historique</span>
             </a>
         </nav>
-        
-        <div class="absolute bottom-4 left-4 right-4">
-            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm font-medium text-orange-800">Plan Gratuit</span>
-                    <span class="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded-full">3/5</span>
-                </div>
-                <p class="text-xs text-orange-700 mb-3">Créations utilisées ce mois</p>
-                <button onclick="showUpgradeModal()" class="w-full bg-brand-orange text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-brand-orange-dark transition-colors">
-                    Passer à Premium
-                </button>
-            </div>
-        </div>
     </div>
 
     <!-- Mobile Sidebar Overlay -->
@@ -84,16 +71,13 @@
                     <h2 id="page-title" class="text-2xl font-bold text-gray-900">Dashboard</h2>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="showUpgradeModal()" class="bg-brand-orange text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors">
-                        <i class="fas fa-crown mr-2"></i>Upgrade Premium
-                    </button>
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
                             <i class="fas fa-user text-gray-600"></i>
                         </div>
                         <div class="hidden md:block">
                             <p class="text-sm font-medium text-gray-900">John Doe</p>
-                            <p class="text-xs text-gray-500">Plan Gratuit</p>
+                            <p class="text-xs text-gray-500">Utilisateur Premium</p>
                         </div>
                     </div>
                 </div>
@@ -187,93 +171,86 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-semibold text-gray-900">Générateur de Vidéo Finance</h3>
-                        <div class="flex items-center space-x-2">
-                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Plan Gratuit</span>
-                            <span class="text-sm text-gray-500">3/5 créations utilisées</span>
-                        </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Configuration Form -->
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ticker / Action</label>
-                                <input type="text" placeholder="Ex: AAPL, TSLA, NVDA" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tickers Moning (ex. : AAPL.US)</label>
+                                <div id="tickers-container" class="space-y-3">
+                                    <div class="ticker-item flex items-center space-x-3">
+                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="color" value="#3B82F6" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
+                                        <button class="remove-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors" style="display: none;">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button id="add-ticker" class="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Ajouter un ticker</span>
+                                </button>
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Période</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>1 jour</option>
-                                        <option>1 semaine</option>
-                                        <option>1 mois</option>
-                                        <option>3 mois</option>
-                                        <option>1 an</option>
-                                    </select>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mois de départ</label>
+                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mois de fin</label>
+                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
                                     <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>16:9 (Paysage)</option>
-                                        <option>9:16 (Portrait)</option>
-                                        <option>1:1 (Carré)</option>
+                                        <option>16/9</option>
+                                        <option>9/16</option>
+                                        <option>1:1</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mode sombre</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>non</option>
+                                        <option>oui</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de Graphique</label>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <button class="chart-option active p-3 border-2 border-brand-orange bg-orange-50 rounded-lg text-center">
-                                        <i class="fas fa-chart-line text-brand-orange mb-1"></i>
-                                        <p class="text-xs font-medium">Ligne</p>
-                                    </button>
-                                    <button class="chart-option p-3 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
-                                        <i class="fas fa-chart-bar text-gray-600 mb-1"></i>
-                                        <p class="text-xs font-medium">Barres</p>
-                                    </button>
-                                    <button class="chart-option p-3 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
-                                        <i class="fas fa-chart-area text-gray-600 mb-1"></i>
-                                        <p class="text-xs font-medium">Zone</p>
-                                    </button>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Type d'investissement</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>Unique au départ</option>
+                                        <option>Investissement programmé</option>
+                                        <option>DCA mensuel</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Valeur d'investissement</label>
+                                    <input type="number" placeholder="100" value="100" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Couleurs</label>
-                                <div class="flex space-x-2">
-                                    <button class="color-option active w-8 h-8 bg-green-500 rounded-full border-2 border-gray-300"></button>
-                                    <button class="color-option w-8 h-8 bg-red-500 rounded-full border-2 border-gray-300"></button>
-                                    <button class="color-option w-8 h-8 bg-blue-500 rounded-full border-2 border-gray-300"></button>
-                                    <button class="color-option w-8 h-8 bg-purple-500 rounded-full border-2 border-gray-300"></button>
-                                    <button class="color-option w-8 h-8 bg-brand-orange rounded-full border-2 border-gray-300"></button>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span class="text-sm font-medium text-gray-700">Mode sombre</span>
-                                <button id="dark-mode-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2">
-                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"></span>
-                                </button>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de graphique</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <option>Lignes</option>
+                                    <option>Barres</option>
+                                    <option>Aires</option>
+                                    <option>Chandelier</option>
+                                </select>
                             </div>
 
                             <button id="generate-video" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
                                 <i class="fas fa-magic"></i>
-                                <span>Générer la Vidéo</span>
+                                <span>Générer</span>
                             </button>
-
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                <div class="flex items-center space-x-2 mb-2">
-                                    <i class="fas fa-info-circle text-blue-600"></i>
-                                    <span class="text-sm font-medium text-blue-800">Plan Gratuit</span>
-                                </div>
-                                <ul class="text-xs text-blue-700 space-y-1">
-                                    <li>• Watermark "Finsya Visual"</li>
-                                    <li>• Résolution 720p</li>
-                                    <li>• 5 créations/mois maximum</li>
-                                </ul>
-                            </div>
                         </div>
 
                         <!-- Preview -->
@@ -299,118 +276,69 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-semibold text-gray-900">Générateur de Visuel Finance</h3>
-                        <div class="flex items-center space-x-2">
-                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Plan Gratuit</span>
-                            <span class="text-sm text-gray-500">3/5 créations utilisées</span>
-                        </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Configuration Form -->
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de Visuel</label>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <button class="visual-type active p-4 border-2 border-brand-orange bg-orange-50 rounded-lg text-center">
-                                        <i class="fas fa-chart-pie text-brand-orange mb-2"></i>
-                                        <p class="text-sm font-medium">KPI Card</p>
-                                    </button>
-                                    <button class="visual-type p-4 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
-                                        <i class="fas fa-chart-bar text-gray-600 mb-2"></i>
-                                        <p class="text-sm font-medium">Graphique</p>
-                                    </button>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tickers Moning (ex. : AAPL.US)</label>
+                                <div id="image-tickers-container" class="space-y-3">
+                                    <div class="image-ticker-item flex items-center space-x-3">
+                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="color" value="#3B82F6" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
+                                        <button class="remove-image-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors" style="display: none;">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="image-ticker-item flex items-center space-x-3">
+                                        <input type="text" placeholder="AAPL.US" value="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <input type="color" value="#10B981" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
+                                        <button class="remove-image-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">KPIs à Afficher</label>
-                                <div class="space-y-2">
-                                    <label class="flex items-center">
-                                        <input type="checkbox" checked class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
-                                        <span class="text-sm text-gray-700">Market Cap</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" checked class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
-                                        <span class="text-sm text-gray-700">Chiffre d'affaires</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
-                                        <span class="text-sm text-gray-700">Bénéfice net</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
-                                        <span class="text-sm text-gray-700">P/E Ratio</span>
-                                    </label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Graphiques</label>
+                                <div id="charts-container" class="space-y-3">
+                                    <div class="chart-item flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <span class="text-gray-900">Capitalisation boursière</span>
+                                        <button class="remove-chart w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="chart-item flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <span class="text-gray-900">Chiffre d'Affaires</span>
+                                        <button class="remove-chart w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="chart-item flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <span class="text-gray-900">Free Cash Flow par action</span>
+                                        <button class="remove-chart w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="chart-item flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <span class="text-gray-900">Bénéfice par action</span>
+                                        <button class="remove-chart w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>1:1 Instagram</option>
-                                        <option>16:9 LinkedIn</option>
-                                        <option>9:16 Stories</option>
-                                        <option>4:5 Facebook</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Style</label>
-                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
-                                        <option>Moderne</option>
-                                        <option>Minimal</option>
-                                        <option>Corporate</option>
-                                        <option>Coloré</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Palette de Couleurs</label>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <button class="palette-option active p-3 border-2 border-brand-orange bg-orange-50 rounded-lg">
-                                        <div class="flex space-x-1 mb-1">
-                                            <div class="w-4 h-4 bg-blue-500 rounded"></div>
-                                            <div class="w-4 h-4 bg-green-500 rounded"></div>
-                                            <div class="w-4 h-4 bg-purple-500 rounded"></div>
-                                        </div>
-                                        <p class="text-xs">Vibrant</p>
-                                    </button>
-                                    <button class="palette-option p-3 border-2 border-gray-200 rounded-lg hover:border-brand-orange">
-                                        <div class="flex space-x-1 mb-1">
-                                            <div class="w-4 h-4 bg-gray-700 rounded"></div>
-                                            <div class="w-4 h-4 bg-gray-500 rounded"></div>
-                                            <div class="w-4 h-4 bg-gray-300 rounded"></div>
-                                        </div>
-                                        <p class="text-xs">Monochrome</p>
-                                    </button>
-                                    <button class="palette-option p-3 border-2 border-gray-200 rounded-lg hover:border-brand-orange">
-                                        <div class="flex space-x-1 mb-1">
-                                            <div class="w-4 h-4 bg-orange-500 rounded"></div>
-                                            <div class="w-4 h-4 bg-red-500 rounded"></div>
-                                            <div class="w-4 h-4 bg-yellow-500 rounded"></div>
-                                        </div>
-                                        <p class="text-xs">Chaud</p>
-                                    </button>
-                                </div>
+                                <button id="add-chart" class="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Ajouter un graphique</span>
+                                </button>
                             </div>
 
                             <button id="generate-visual" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
                                 <i class="fas fa-magic"></i>
-                                <span>Générer le Visuel</span>
+                                <span>Générer</span>
                             </button>
-
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                <div class="flex items-center space-x-2 mb-2">
-                                    <i class="fas fa-info-circle text-blue-600"></i>
-                                    <span class="text-sm font-medium text-blue-800">Plan Gratuit</span>
-                                </div>
-                                <ul class="text-xs text-blue-700 space-y-1">
-                                    <li>• Watermark "Finsya Visual"</li>
-                                    <li>• Résolution 1080x1080px</li>
-                                    <li>• 5 créations/mois maximum</li>
-                                </ul>
-                            </div>
                         </div>
 
                         <!-- Preview -->
@@ -512,56 +440,6 @@
         </div>
     </div>
 
-    <!-- Upgrade Modal -->
-    <div id="upgrade-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-md w-full p-6">
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-brand-orange rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-crown text-white text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Passer à Premium</h3>
-                <p class="text-gray-600">Débloquez toutes les fonctionnalités</p>
-            </div>
-
-            <div class="space-y-4 mb-6">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-check text-green-500"></i>
-                    <span class="text-sm text-gray-700">Créations illimitées</span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-check text-green-500"></i>
-                    <span class="text-sm text-gray-700">Pas de watermark</span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-check text-green-500"></i>
-                    <span class="text-sm text-gray-700">Export HD (1080p/4K)</span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-check text-green-500"></i>
-                    <span class="text-sm text-gray-700">Support prioritaire</span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-check text-green-500"></i>
-                    <span class="text-sm text-gray-700">Personnalisation avancée</span>
-                </div>
-            </div>
-
-            <div class="text-center mb-6">
-                <div class="text-3xl font-bold text-gray-900">5€<span class="text-lg font-normal text-gray-600">/mois</span></div>
-                <p class="text-sm text-gray-500">Facturation mensuelle</p>
-            </div>
-
-            <div class="flex space-x-3">
-                <button onclick="closeUpgradeModal()" class="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50">
-                    Annuler
-                </button>
-                <button class="flex-1 bg-brand-orange text-white py-2 px-4 rounded-lg hover:bg-brand-orange-dark">
-                    Upgrade Now
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // Navigation
         function showSection(sectionName) {
@@ -598,87 +476,75 @@
             overlay.classList.toggle('hidden');
         }
 
-        // Modal functions
-        function showUpgradeModal() {
-            document.getElementById('upgrade-modal').classList.remove('hidden');
-        }
-
-        function closeUpgradeModal() {
-            document.getElementById('upgrade-modal').classList.add('hidden');
-        }
-
-        // Interactive elements
+        // Ticker management for video generator
         document.addEventListener('DOMContentLoaded', function() {
-            // Chart options selection
-            document.querySelectorAll('.chart-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.chart-option').forEach(opt => {
-                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
-                        opt.classList.add('border-gray-200');
-                        opt.querySelector('i').classList.remove('text-brand-orange');
-                        opt.querySelector('i').classList.add('text-gray-600');
-                    });
-                    
-                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
-                    this.classList.remove('border-gray-200');
-                    this.querySelector('i').classList.add('text-brand-orange');
-                    this.querySelector('i').classList.remove('text-gray-600');
-                });
+            const addTickerBtn = document.getElementById('add-ticker');
+            const tickersContainer = document.getElementById('tickers-container');
+
+            addTickerBtn.addEventListener('click', function() {
+                const tickerDiv = document.createElement('div');
+                tickerDiv.className = 'ticker-item flex items-center space-x-3';
+                tickerDiv.innerHTML = `
+                    <input type="text" placeholder="AAPL.US" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                    <input type="color" value="#3B82F6" class="w-10 h-10 rounded border border-gray-300 cursor-pointer">
+                    <button class="remove-ticker w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                tickersContainer.appendChild(tickerDiv);
+                updateRemoveButtons();
             });
 
-            // Color options selection
-            document.querySelectorAll('.color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.color-option').forEach(opt => {
-                        opt.classList.remove('active', 'ring-2', 'ring-brand-orange');
-                    });
-                    this.classList.add('active', 'ring-2', 'ring-brand-orange');
-                });
+            // Event delegation for remove ticker buttons
+            tickersContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-ticker')) {
+                    e.target.closest('.ticker-item').remove();
+                    updateRemoveButtons();
+                }
             });
 
-            // Visual type selection
-            document.querySelectorAll('.visual-type').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.visual-type').forEach(opt => {
-                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
-                        opt.classList.add('border-gray-200');
-                        opt.querySelector('i').classList.remove('text-brand-orange');
-                        opt.querySelector('i').classList.add('text-gray-600');
-                    });
-                    
-                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
-                    this.classList.remove('border-gray-200');
-                    this.querySelector('i').classList.add('text-brand-orange');
-                    this.querySelector('i').classList.remove('text-gray-600');
+            function updateRemoveButtons() {
+                const tickers = tickersContainer.querySelectorAll('.ticker-item');
+                tickers.forEach((ticker, index) => {
+                    const removeBtn = ticker.querySelector('.remove-ticker');
+                    if (tickers.length > 1) {
+                        removeBtn.style.display = 'flex';
+                    } else {
+                        removeBtn.style.display = 'none';
+                    }
                 });
+            }
+
+            // Image tickers management
+            const imageTickers = document.getElementById('image-tickers-container');
+            imageTickers.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-image-ticker')) {
+                    const tickers = imageTickers.querySelectorAll('.image-ticker-item');
+                    if (tickers.length > 1) {
+                        e.target.closest('.image-ticker-item').remove();
+                    }
+                }
             });
 
-            // Palette options selection
-            document.querySelectorAll('.palette-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.palette-option').forEach(opt => {
-                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
-                        opt.classList.add('border-gray-200');
-                    });
-                    
-                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
-                    this.classList.remove('border-gray-200');
-                });
+            // Charts management
+            const addChartBtn = document.getElementById('add-chart');
+            const chartsContainer = document.getElementById('charts-container');
+
+            addChartBtn.addEventListener('click', function() {
+                const chartDiv = document.createElement('div');
+                chartDiv.className = 'chart-item flex items-center justify-between p-3 border border-gray-200 rounded-lg';
+                chartDiv.innerHTML = `
+                    <span class="text-gray-900">Nouveau graphique</span>
+                    <button class="remove-chart w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                chartsContainer.appendChild(chartDiv);
             });
 
-            // Dark mode toggle
-            document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-                const toggle = this.querySelector('span');
-                if (toggle.classList.contains('translate-x-1')) {
-                    toggle.classList.remove('translate-x-1');
-                    toggle.classList.add('translate-x-6');
-                    this.classList.remove('bg-gray-200');
-                    this.classList.add('bg-brand-orange');
-                } else {
-                    toggle.classList.remove('translate-x-6');
-                    toggle.classList.add('translate-x-1');
-                    this.classList.remove('bg-brand-orange');
-                    this.classList.add('bg-gray-200');
+            chartsContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-chart')) {
+                    e.target.closest('.chart-item').remove();
                 }
             });
 
@@ -688,7 +554,7 @@
                 this.disabled = true;
                 
                 setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer la Vidéo';
+                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer';
                     this.disabled = false;
                     alert('Vidéo générée avec succès !');
                 }, 3000);
@@ -699,18 +565,11 @@
                 this.disabled = true;
                 
                 setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer le Visuel';
+                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer';
                     this.disabled = false;
                     alert('Visuel généré avec succès !');
                 }, 2000);
             });
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('upgrade-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeUpgradeModal();
-            }
         });
     </script>
 
