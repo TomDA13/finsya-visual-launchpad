@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finsya Visual - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-orange': '#FA5003',
+                        'brand-orange-light': '#FF6B2B',
+                        'brand-orange-dark': '#E04800',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
+                    <i class="fas fa-chart-line text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">Finsya Visual</h1>
+                    <p class="text-xs text-gray-500">Finance Creator</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="p-4 space-y-2">
+            <a href="#dashboard" onclick="showSection('dashboard')" class="nav-item active flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-home text-gray-600"></i>
+                <span class="text-gray-700 font-medium">Dashboard</span>
+            </a>
+            <a href="#video-generator" onclick="showSection('video-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-video text-gray-600"></i>
+                <span class="text-gray-700 font-medium">Générateur Vidéo</span>
+            </a>
+            <a href="#visual-generator" onclick="showSection('visual-generator')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-image text-gray-600"></i>
+                <span class="text-gray-700 font-medium">Générateur Visuel</span>
+            </a>
+            <a href="#history" onclick="showSection('history')" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-history text-gray-600"></i>
+                <span class="text-gray-700 font-medium">Historique</span>
+            </a>
+        </nav>
+        
+        <div class="absolute bottom-4 left-4 right-4">
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-orange-800">Plan Gratuit</span>
+                    <span class="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded-full">3/5</span>
+                </div>
+                <p class="text-xs text-orange-700 mb-3">Créations utilisées ce mois</p>
+                <button onclick="showUpgradeModal()" class="w-full bg-brand-orange text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-brand-orange-dark transition-colors">
+                    Passer à Premium
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-gray-200 p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                    <h2 id="page-title" class="text-2xl font-bold text-gray-900">Dashboard</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showUpgradeModal()" class="bg-brand-orange text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors">
+                        <i class="fas fa-crown mr-2"></i>Upgrade Premium
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </div>
+                        <div class="hidden md:block">
+                            <p class="text-sm font-medium text-gray-900">John Doe</p>
+                            <p class="text-xs text-gray-500">Plan Gratuit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section p-6">
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Bienvenue sur Finsya Visual</h3>
+                <p class="text-gray-600">Créez des visuels et vidéos financiers professionnels en quelques clics</p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('video-generator')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-video text-red-600 text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Générateur Vidéo</h4>
+                            <p class="text-sm text-gray-600">Animations financières dynamiques</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Créez des vidéos animées avec graphiques financiers, tickers et données en temps réel.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Formats : MP4, GIF</span>
+                        <i class="fas fa-arrow-right text-brand-orange"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('visual-generator')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-blue-600 text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Générateur Visuel</h4>
+                            <p class="text-sm text-gray-600">Images statiques professionnelles</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Générez des visuels statiques pour vos réseaux sociaux avec KPIs et graphiques.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Formats : PNG, JPG</span>
+                        <i class="fas fa-arrow-right text-brand-orange"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Creations -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-semibold text-gray-900">Créations Récentes</h4>
+                    <a href="#history" onclick="showSection('history')" class="text-brand-orange hover:text-brand-orange-dark text-sm font-medium">Voir tout</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-50 rounded-lg p-4 text-center">
+                        <div class="w-full h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-lg mb-2 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">AAPL - Vidéo</p>
+                        <p class="text-xs text-gray-500">Il y a 2h</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 text-center">
+                        <div class="w-full h-20 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg mb-2 flex items-center justify-center">
+                            <i class="fas fa-chart-bar text-white text-xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">TSLA - Visuel</p>
+                        <p class="text-xs text-gray-500">Hier</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50">
+                        <div class="w-full h-20 bg-gray-300 rounded-lg mb-2 flex items-center justify-center">
+                            <i class="fas fa-plus text-gray-500 text-xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-500">Nouvelle création</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 text-center opacity-50">
+                        <div class="w-full h-20 bg-gray-300 rounded-lg mb-2 flex items-center justify-center">
+                            <i class="fas fa-plus text-gray-500 text-xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-500">Nouvelle création</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Generator Section -->
+        <div id="video-generator-section" class="section hidden p-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Générateur de Vidéo Finance</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Plan Gratuit</span>
+                            <span class="text-sm text-gray-500">3/5 créations utilisées</span>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Configuration Form -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ticker / Action</label>
+                                <input type="text" placeholder="Ex: AAPL, TSLA, NVDA" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Période</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>1 jour</option>
+                                        <option>1 semaine</option>
+                                        <option>1 mois</option>
+                                        <option>3 mois</option>
+                                        <option>1 an</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>16:9 (Paysage)</option>
+                                        <option>9:16 (Portrait)</option>
+                                        <option>1:1 (Carré)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de Graphique</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button class="chart-option active p-3 border-2 border-brand-orange bg-orange-50 rounded-lg text-center">
+                                        <i class="fas fa-chart-line text-brand-orange mb-1"></i>
+                                        <p class="text-xs font-medium">Ligne</p>
+                                    </button>
+                                    <button class="chart-option p-3 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
+                                        <i class="fas fa-chart-bar text-gray-600 mb-1"></i>
+                                        <p class="text-xs font-medium">Barres</p>
+                                    </button>
+                                    <button class="chart-option p-3 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
+                                        <i class="fas fa-chart-area text-gray-600 mb-1"></i>
+                                        <p class="text-xs font-medium">Zone</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Couleurs</label>
+                                <div class="flex space-x-2">
+                                    <button class="color-option active w-8 h-8 bg-green-500 rounded-full border-2 border-gray-300"></button>
+                                    <button class="color-option w-8 h-8 bg-red-500 rounded-full border-2 border-gray-300"></button>
+                                    <button class="color-option w-8 h-8 bg-blue-500 rounded-full border-2 border-gray-300"></button>
+                                    <button class="color-option w-8 h-8 bg-purple-500 rounded-full border-2 border-gray-300"></button>
+                                    <button class="color-option w-8 h-8 bg-brand-orange rounded-full border-2 border-gray-300"></button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm font-medium text-gray-700">Mode sombre</span>
+                                <button id="dark-mode-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2">
+                                    <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"></span>
+                                </button>
+                            </div>
+
+                            <button id="generate-video" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
+                                <i class="fas fa-magic"></i>
+                                <span>Générer la Vidéo</span>
+                            </button>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <i class="fas fa-info-circle text-blue-600"></i>
+                                    <span class="text-sm font-medium text-blue-800">Plan Gratuit</span>
+                                </div>
+                                <ul class="text-xs text-blue-700 space-y-1">
+                                    <li>• Watermark "Finsya Visual"</li>
+                                    <li>• Résolution 720p</li>
+                                    <li>• 5 créations/mois maximum</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-64 h-36 bg-white rounded-lg shadow-sm border border-gray-200 flex items-center justify-center mb-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-play-circle text-gray-400 text-4xl mb-2"></i>
+                                        <p class="text-sm text-gray-500">Aperçu de la vidéo</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600">La prévisualisation apparaîtra ici</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual Generator Section -->
+        <div id="visual-generator-section" class="section hidden p-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Générateur de Visuel Finance</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Plan Gratuit</span>
+                            <span class="text-sm text-gray-500">3/5 créations utilisées</span>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Configuration Form -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Type de Visuel</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button class="visual-type active p-4 border-2 border-brand-orange bg-orange-50 rounded-lg text-center">
+                                        <i class="fas fa-chart-pie text-brand-orange mb-2"></i>
+                                        <p class="text-sm font-medium">KPI Card</p>
+                                    </button>
+                                    <button class="visual-type p-4 border-2 border-gray-200 rounded-lg text-center hover:border-brand-orange">
+                                        <i class="fas fa-chart-bar text-gray-600 mb-2"></i>
+                                        <p class="text-sm font-medium">Graphique</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">KPIs à Afficher</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm text-gray-700">Market Cap</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm text-gray-700">Chiffre d'affaires</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm text-gray-700">Bénéfice net</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2 rounded text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm text-gray-700">P/E Ratio</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Format</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>1:1 Instagram</option>
+                                        <option>16:9 LinkedIn</option>
+                                        <option>9:16 Stories</option>
+                                        <option>4:5 Facebook</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Style</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                        <option>Moderne</option>
+                                        <option>Minimal</option>
+                                        <option>Corporate</option>
+                                        <option>Coloré</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Palette de Couleurs</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button class="palette-option active p-3 border-2 border-brand-orange bg-orange-50 rounded-lg">
+                                        <div class="flex space-x-1 mb-1">
+                                            <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                                            <div class="w-4 h-4 bg-green-500 rounded"></div>
+                                            <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                                        </div>
+                                        <p class="text-xs">Vibrant</p>
+                                    </button>
+                                    <button class="palette-option p-3 border-2 border-gray-200 rounded-lg hover:border-brand-orange">
+                                        <div class="flex space-x-1 mb-1">
+                                            <div class="w-4 h-4 bg-gray-700 rounded"></div>
+                                            <div class="w-4 h-4 bg-gray-500 rounded"></div>
+                                            <div class="w-4 h-4 bg-gray-300 rounded"></div>
+                                        </div>
+                                        <p class="text-xs">Monochrome</p>
+                                    </button>
+                                    <button class="palette-option p-3 border-2 border-gray-200 rounded-lg hover:border-brand-orange">
+                                        <div class="flex space-x-1 mb-1">
+                                            <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                                            <div class="w-4 h-4 bg-red-500 rounded"></div>
+                                            <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                                        </div>
+                                        <p class="text-xs">Chaud</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button id="generate-visual" class="w-full bg-brand-orange text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-orange-dark transition-colors flex items-center justify-center space-x-2">
+                                <i class="fas fa-magic"></i>
+                                <span>Générer le Visuel</span>
+                            </button>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <i class="fas fa-info-circle text-blue-600"></i>
+                                    <span class="text-sm font-medium text-blue-800">Plan Gratuit</span>
+                                </div>
+                                <ul class="text-xs text-blue-700 space-y-1">
+                                    <li>• Watermark "Finsya Visual"</li>
+                                    <li>• Résolution 1080x1080px</li>
+                                    <li>• 5 créations/mois maximum</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-64 h-64 bg-white rounded-lg shadow-sm border border-gray-200 flex items-center justify-center mb-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-image text-gray-400 text-4xl mb-2"></i>
+                                        <p class="text-sm text-gray-500">Aperçu du visuel</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600">La prévisualisation apparaîtra ici</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div id="history-section" class="section hidden p-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Historique des Créations</h3>
+                
+                <div class="grid gap-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-video text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">AAPL - Animation de prix</h4>
+                                <p class="text-sm text-gray-600">Vidéo • 16:9 • Mode sombre</p>
+                                <p class="text-xs text-gray-500">Créé il y a 2 heures</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-image text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">TSLA - KPI Card</h4>
+                                <p class="text-sm text-gray-600">Visuel • 1:1 • Style moderne</p>
+                                <p class="text-xs text-gray-500">Créé hier</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-video text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">NVDA - Graphique performance</h4>
+                                <p class="text-sm text-gray-600">Vidéo • 9:16 • Mode clair</p>
+                                <p class="text-xs text-gray-500">Créé il y a 3 jours</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-brand-orange">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div id="upgrade-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-crown text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Passer à Premium</h3>
+                <p class="text-gray-600">Débloquez toutes les fonctionnalités</p>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check text-green-500"></i>
+                    <span class="text-sm text-gray-700">Créations illimitées</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check text-green-500"></i>
+                    <span class="text-sm text-gray-700">Pas de watermark</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check text-green-500"></i>
+                    <span class="text-sm text-gray-700">Export HD (1080p/4K)</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check text-green-500"></i>
+                    <span class="text-sm text-gray-700">Support prioritaire</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check text-green-500"></i>
+                    <span class="text-sm text-gray-700">Personnalisation avancée</span>
+                </div>
+            </div>
+
+            <div class="text-center mb-6">
+                <div class="text-3xl font-bold text-gray-900">5€<span class="text-lg font-normal text-gray-600">/mois</span></div>
+                <p class="text-sm text-gray-500">Facturation mensuelle</p>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="closeUpgradeModal()" class="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50">
+                    Annuler
+                </button>
+                <button class="flex-1 bg-brand-orange text-white py-2 px-4 rounded-lg hover:bg-brand-orange-dark">
+                    Upgrade Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').classList.remove('hidden');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard',
+                'video-generator': 'Générateur Vidéo',
+                'visual-generator': 'Générateur Visuel',
+                'history': 'Historique'
+            };
+            document.getElementById('page-title').textContent = titles[sectionName];
+        }
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // Modal functions
+        function showUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.remove('hidden');
+        }
+
+        function closeUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.add('hidden');
+        }
+
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart options selection
+            document.querySelectorAll('.chart-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.chart-option').forEach(opt => {
+                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
+                        opt.classList.add('border-gray-200');
+                        opt.querySelector('i').classList.remove('text-brand-orange');
+                        opt.querySelector('i').classList.add('text-gray-600');
+                    });
+                    
+                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
+                    this.classList.remove('border-gray-200');
+                    this.querySelector('i').classList.add('text-brand-orange');
+                    this.querySelector('i').classList.remove('text-gray-600');
+                });
+            });
+
+            // Color options selection
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(opt => {
+                        opt.classList.remove('active', 'ring-2', 'ring-brand-orange');
+                    });
+                    this.classList.add('active', 'ring-2', 'ring-brand-orange');
+                });
+            });
+
+            // Visual type selection
+            document.querySelectorAll('.visual-type').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.visual-type').forEach(opt => {
+                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
+                        opt.classList.add('border-gray-200');
+                        opt.querySelector('i').classList.remove('text-brand-orange');
+                        opt.querySelector('i').classList.add('text-gray-600');
+                    });
+                    
+                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
+                    this.classList.remove('border-gray-200');
+                    this.querySelector('i').classList.add('text-brand-orange');
+                    this.querySelector('i').classList.remove('text-gray-600');
+                });
+            });
+
+            // Palette options selection
+            document.querySelectorAll('.palette-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.palette-option').forEach(opt => {
+                        opt.classList.remove('active', 'border-brand-orange', 'bg-orange-50');
+                        opt.classList.add('border-gray-200');
+                    });
+                    
+                    this.classList.add('active', 'border-brand-orange', 'bg-orange-50');
+                    this.classList.remove('border-gray-200');
+                });
+            });
+
+            // Dark mode toggle
+            document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+                const toggle = this.querySelector('span');
+                if (toggle.classList.contains('translate-x-1')) {
+                    toggle.classList.remove('translate-x-1');
+                    toggle.classList.add('translate-x-6');
+                    this.classList.remove('bg-gray-200');
+                    this.classList.add('bg-brand-orange');
+                } else {
+                    toggle.classList.remove('translate-x-6');
+                    toggle.classList.add('translate-x-1');
+                    this.classList.remove('bg-brand-orange');
+                    this.classList.add('bg-gray-200');
+                }
+            });
+
+            // Generate buttons
+            document.getElementById('generate-video').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Génération en cours...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer la Vidéo';
+                    this.disabled = false;
+                    alert('Vidéo générée avec succès !');
+                }, 3000);
+            });
+
+            document.getElementById('generate-visual').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Génération en cours...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-magic mr-2"></i>Générer le Visuel';
+                    this.disabled = false;
+                    alert('Visuel généré avec succès !');
+                }, 2000);
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('upgrade-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeUpgradeModal();
+            }
+        });
+    </script>
+
+    <style>
+        .nav-item.active {
+            background-color: #FFF7ED;
+            color: #FA5003;
+        }
+        
+        .nav-item.active i {
+            color: #FA5003;
+        }
+        
+        .nav-item.active span {
+            color: #FA5003;
+            font-weight: 600;
+        }
+    </style>
+</body>
+</html>
