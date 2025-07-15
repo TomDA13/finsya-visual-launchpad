@@ -8,6 +8,13 @@ import { Label } from '@/components/ui/label';
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState('video');
   const [tickers, setTickers] = useState([{ symbol: 'AAPL.US', color: '#3B82F6' }]);
+  const [imageTickers, setImageTickers] = useState([{ symbol: 'AAPL.US', color: '#3B82F6' }, { symbol: 'AAPL.US', color: '#10B981' }]);
+  const [charts, setCharts] = useState([
+    { name: 'Capitalisation boursière' },
+    { name: 'Chiffre d\'Affaires' },
+    { name: 'Free Cash Flow par action' },
+    { name: 'Bénéfice par action' }
+  ]);
 
   const addTicker = () => {
     setTickers([...tickers, { symbol: '', color: '#3B82F6' }]);
@@ -24,6 +31,38 @@ const Dashboard = () => {
       i === index ? { ...ticker, [field]: value } : ticker
     );
     setTickers(updatedTickers);
+  };
+
+  const addImageTicker = () => {
+    setImageTickers([...imageTickers, { symbol: '', color: '#3B82F6' }]);
+  };
+
+  const removeImageTicker = (index: number) => {
+    if (imageTickers.length > 1) {
+      setImageTickers(imageTickers.filter((_, i) => i !== index));
+    }
+  };
+
+  const updateImageTicker = (index: number, field: 'symbol' | 'color', value: string) => {
+    const updatedTickers = imageTickers.map((ticker, i) => 
+      i === index ? { ...ticker, [field]: value } : ticker
+    );
+    setImageTickers(updatedTickers);
+  };
+
+  const addChart = () => {
+    setCharts([...charts, { name: '' }]);
+  };
+
+  const removeChart = (index: number) => {
+    setCharts(charts.filter((_, i) => i !== index));
+  };
+
+  const updateChart = (index: number, name: string) => {
+    const updatedCharts = charts.map((chart, i) => 
+      i === index ? { ...chart, name } : chart
+    );
+    setCharts(updatedCharts);
   };
 
   return (
@@ -269,57 +308,85 @@ const Dashboard = () => {
             )}
 
             {activeSection === 'image' && (
-              <div className="bg-white rounded-xl shadow-sm border p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Créer un visuel financier</h2>
+              <div className="bg-white rounded-xl shadow-sm border p-8">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <Image className="w-5 h-5 text-orange-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900">Créer un visuel financier</h2>
+                </div>
                 
-                <div className="space-y-6">
+                <div className="space-y-8">
+                  {/* Tickers Section for Images */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Format d'image
-                    </label>
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="border-2 border-gray-200 rounded-lg p-3 hover:border-orange-500 cursor-pointer text-center">
-                        <div className="w-full h-12 bg-gray-200 rounded mb-2"></div>
-                        <p className="text-xs">Carré (1:1)</p>
-                      </div>
-                      <div className="border-2 border-gray-200 rounded-lg p-3 hover:border-orange-500 cursor-pointer text-center">
-                        <div className="w-full h-8 bg-gray-200 rounded mb-2"></div>
-                        <p className="text-xs">Paysage (16:9)</p>
-                      </div>
-                      <div className="border-2 border-gray-200 rounded-lg p-3 hover:border-orange-500 cursor-pointer text-center">
-                        <div className="w-6 h-12 bg-gray-200 rounded mb-2 mx-auto"></div>
-                        <p className="text-xs">Portrait (9:16)</p>
-                      </div>
+                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                      Tickers Moning (ex. : AAPL.US)
+                    </Label>
+                    <div className="space-y-3">
+                      {imageTickers.map((ticker, index) => (
+                        <div key={index} className="flex items-center space-x-3">
+                          <div className="flex-1">
+                            <Input
+                              type="text"
+                              placeholder="AAPL.US"
+                              value={ticker.symbol}
+                              onChange={(e) => updateImageTicker(index, 'symbol', e.target.value)}
+                              className="h-12 text-lg border-gray-300"
+                            />
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="color"
+                              value={ticker.color}
+                              onChange={(e) => updateImageTicker(index, 'color', e.target.value)}
+                              className="w-12 h-12 rounded-lg border border-gray-300 cursor-pointer"
+                            />
+                            {imageTickers.length > 1 && (
+                              <button
+                                onClick={() => removeImageTicker(index)}
+                                className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
+                  {/* Charts Section */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Données à afficher
-                    </label>
-                    <textarea 
-                      placeholder="Entrez vos KPIs, données financières..."
-                      rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Couleurs du thème
-                    </label>
-                    <div className="flex space-x-2">
-                      <div className="w-8 h-8 bg-blue-500 rounded cursor-pointer border-2 border-gray-300"></div>
-                      <div className="w-8 h-8 bg-green-500 rounded cursor-pointer border-2 border-gray-300"></div>
-                      <div className="w-8 h-8 bg-red-500 rounded cursor-pointer border-2 border-gray-300"></div>
-                      <div className="w-8 h-8 bg-purple-500 rounded cursor-pointer border-2 border-gray-300"></div>
-                      <div className="w-8 h-8 bg-orange-500 rounded cursor-pointer border-2 border-orange-500"></div>
+                    <Label className="block text-base font-semibold text-gray-900 mb-4">
+                      Graphiques
+                    </Label>
+                    <div className="space-y-3">
+                      {charts.map((chart, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                          <span className="text-gray-900">{chart.name}</span>
+                          <button
+                            onClick={() => removeChart(index)}
+                            className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
                     </div>
+                    <button
+                      onClick={addChart}
+                      className="mt-3 text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Ajouter un graphique</span>
+                    </button>
                   </div>
 
-                  <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
-                    Générer l'image
-                  </button>
+                  <div className="pt-6">
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+                      Générer
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
