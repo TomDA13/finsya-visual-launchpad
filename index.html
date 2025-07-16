@@ -270,7 +270,7 @@
 
           <!-- Media Title -->
           <div class="text-center mt-6">
-            <h3 class="text-2xl font-bold text-gray-900" id="media-title">Stock Price Evolution Animation</h3>
+            <h3 class="text-2xl font-bold text-gray-900" id="media-title">Custom Investment Animation Generator</h3>
           </div>
         </div>
       </div>
@@ -486,24 +486,24 @@
     // Media carousel data - using actual uploaded files
     const mediaItems = [
       {
-        type: 'video',
-        src: '/c912d623-3e2f-4560-9631-921b37b4ff73.mp4',
-        title: 'Stock Price Evolution Animation'
+        type: 'image',
+        src: '/lovable-uploads/215bb7e8-806e-4a96-92ba-2f5a3b5f0335.png',
+        title: 'Custom Investment Animation Generator'
       },
       {
-        type: 'video', 
-        src: '/7681a854-69ec-4bc9-a776-f318ef2999bf.mp4',
-        title: 'Stock Price Evolution Animation'
+        type: 'image', 
+        src: '/lovable-uploads/3bc8821b-a0a2-4ef8-897c-7727bfb861be.png',
+        title: 'Multi-criteria Company Comparisons'
       },
       {
         type: 'image',
-        src: '/moning.co.png',
+        src: '/adaidasvsnike.png',
         title: 'Company Versus Charts'
       },
       {
         type: 'image',
-        src: '/adaidasvsnike.png', 
-        title: 'Company Versus Charts'
+        src: '/moning.co.png', 
+        title: 'Financial Dashboard'
       }
     ];
 
@@ -622,8 +622,16 @@
       const title = document.getElementById('media-title');
       if (title) {
         const t = translations[currentLang];
-        title.textContent = mediaItems[currentMediaIndex].title === 'Stock Price Evolution Animation' ? 
-          t.mediaTitle1 : t.mediaTitle2;
+        const currentItem = mediaItems[currentMediaIndex];
+        if (currentItem.title === 'Custom Investment Animation Generator') {
+          title.textContent = t.mediaTitle1;
+        } else if (currentItem.title === 'Multi-criteria Company Comparisons') {
+          title.textContent = t.mediaTitle2;
+        } else if (currentItem.title === 'Company Versus Charts') {
+          title.textContent = t.mediaTitle3;
+        } else {
+          title.textContent = t.mediaTitle4;
+        }
       }
 
       // Update indicators
@@ -699,8 +707,10 @@
         ctaTitle: "Ready to create like a pro?",
         ctaSubtitle: "Join thousands of finance creators who trust Finsya Visuals for their content needs.",
         ctaFinal: "Start creating for free",
-        mediaTitle1: "Stock Price Evolution Animation",
-        mediaTitle2: "Company Versus Charts",
+        mediaTitle1: "Custom Investment Animation Generator",
+        mediaTitle2: "Multi-criteria Company Comparisons",
+        mediaTitle3: "Company Versus Charts",
+        mediaTitle4: "Financial Dashboard",
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         contact: "Contact",
@@ -747,8 +757,10 @@
         ctaTitle: "Prêt à créer comme un pro ?",
         ctaSubtitle: "Rejoignez des milliers de créateurs financiers qui font confiance à Finsya Visuals pour leurs besoins de contenu.",
         ctaFinal: "Commencer à créer gratuitement",
-        mediaTitle1: "Animation d'évolution du cours des actions",
-        mediaTitle2: "Graphiques de comparaison d'entreprises",
+        mediaTitle1: "Générateur d'animations d'investissement personnalisées",
+        mediaTitle2: "Comparaisons multi-critères d'entreprises", 
+        mediaTitle3: "Graphiques de comparaison d'entreprises",
+        mediaTitle4: "Tableau de bord financier",
         privacy: "Politique de confidentialité",
         terms: "Conditions d'utilisation",
         contact: "Contact",
@@ -808,8 +820,16 @@
       // Update media title based on current carousel position
       const mediaTitle = document.getElementById('media-title');
       if (mediaTitle) {
-        mediaTitle.textContent = mediaItems[currentMediaIndex].title === 'Stock Price Evolution Animation' ? 
-          t.mediaTitle1 : t.mediaTitle2;
+        const currentItem = mediaItems[currentMediaIndex];
+        if (currentItem.title === 'Custom Investment Animation Generator') {
+          mediaTitle.textContent = t.mediaTitle1;
+        } else if (currentItem.title === 'Multi-criteria Company Comparisons') {
+          mediaTitle.textContent = t.mediaTitle2;
+        } else if (currentItem.title === 'Company Versus Charts') {
+          mediaTitle.textContent = t.mediaTitle3;
+        } else {
+          mediaTitle.textContent = t.mediaTitle4;
+        }
       }
     }
 
